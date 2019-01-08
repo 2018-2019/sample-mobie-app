@@ -98,7 +98,7 @@ html, body {
     <header class="header item">
       <i id="toc" class="sitemap icon"></i>
       
-        <a href="../../index.html"> Intro to Kotlin  </a>
+        <a href="../../index.html"> Labs  </a>
       
     </header>
     <div class="right tab-menu menu">
@@ -125,6 +125,10 @@ html, body {
       
         <a class="item" data-tab="05">
           05
+        </a>
+      
+        <a class="item" data-tab="06">
+          06
         </a>
       
         <a class="item" data-tab="Exercises">
@@ -364,27 +368,365 @@ html, body {
     val doubleNum: Double = intNum.toDouble()</code></pre>
 <p>For each of the variables above, print out the value and also the type.  Ensure that the types are what you were expecting. </p>
 <h2>Character types</h2>
-<p>todo</p>
+<p>The character type in Kotlin is the <em>Char</em>.  Like numbers, you can use type inference when defining characters.  Try this code in your main function:</p>
+<pre><code>    //characters in kotlin
+    val aChar = &#39;a&#39;            //type inference
+    val bChar: Char = &#39;b&#39;   //explicitly defining the type</code></pre>
+<p>Now try printing out the value and the type of each of these variables:</p>
+<pre><code>    println(&quot;aChar: &quot; + aChar + &quot; - the type is: &quot; + aChar.javaClass)
+    println(&quot;bChar: &quot; + bChar + &quot; - the type is: &quot; + bChar.javaClass)</code></pre>
+<p>When you run your main function, you should now have output similar to this at the end of the print stream:</p>
+<pre><code>aChar: a - the type is: char
+bChar: b - the type is: char</code></pre>
+<p>You are probably noticing that the print output to the console is getting larger and larger as we progress through the lab...we will show you in a few steps how to write functions in Kotlin and we will farm out some of this code into these functions. </p>
 <h2>Boolean types</h2>
-<p>todo</p>
+<p>The boolean type in Kotlin is <em>Boolean</em>.  Once again, you can use type inference when declaring these.  Try this code in your main function:</p>
+<pre><code>    //booleans in kotlin
+    val aFlag = true
+    val bFlag: Boolean = false</code></pre>
+<p>Now try printing out the value and the type of each of these variables:</p>
+<pre><code>    println(&quot;aFlag: &quot; + aFlag + &quot; - the type is: &quot; + aFlag.javaClass)
+    println(&quot;bFlag: &quot; + bFlag + &quot; - the type is: &quot; + bFlag.javaClass)</code></pre>
+<p>When you run your main function, you should now have output similar to this at the end of the print stream:</p>
+<pre><code>aFlag: true - the type is: boolean
+bFlag: false - the type is: boolean</code></pre>
+<p>Save your work and keep the project open.</p>
 
           </div>
         
           <div class="ui tab segment lab" data-tab="04">
             <h1>val vs var</h1>
 <p>In the previous steps, we used <em>val</em> to create our variables.  In this step, we will look at <em>var</em> and uncover the difference between the two.</p>
-<p>todo </p>
+<p>We will continue working in the <em>types</em> project from the previous steps.</p>
+<h2>val - deferred initialisation</h2>
+<p>So far, we have only used <em>val</em> to declare our variables.  For example:</p>
+<pre><code>    //numbers in kotlin
+    val oneMillion = 1_000_000
+    val byteNum: Byte = 10              
+
+    //characters in kotlin
+    val aChar = &#39;a&#39;            //type inference
+    val bChar: Char = &#39;b&#39;   //explicitly defining the type
+
+    //booleans in kotlin
+    val aFlag = true
+    val bFlag: Boolean = false</code></pre>
+<p>These variables are immutable i.e. once they are assigned a value, the value cannot be changed (similar to <em>final</em> variables in java).</p>
+<p>In all the examples above, we assigned a value immediately.  Lets update our code to defer the assignment of a value until later in the code.  To do this, change the following character variable declaration in your code from:</p>
+<pre><code>    val bChar: Char = &#39;b&#39;   //explicitly defining the type and setting the value</code></pre>
+<p>to be:</p>
+<pre><code>    val bChar: Char      //explicitly defining the type - no value set</code></pre>
+<p>We have generated a syntax error:</p>
+<p><img src="img/12.png" alt=""></p>
+<p>Fix this error by inserting this initialisation between the two print statements:</p>
+<pre><code>    println(&quot;aChar: &quot; + aChar + &quot; - the type is: &quot; + aChar.javaClass)
+    bChar = &#39;b&#39;
+    println(&quot;bChar: &quot; + bChar + &quot; - the type is: &quot; + bChar.javaClass)</code></pre>
+<p>Our code now compiles, but did you notice that IntelliJ is still not happy...the variable <em>bChar</em> is still underlined...it&#39;s not a syntax error this time, but a helpful message.  Hover your mouse pointer over the variable and you should see the following message appear:</p>
+<p><img src="img/13.png" alt=""></p>
+<p>Click on the <em>more</em> link to read the full message.  IntelliJ provides a lot of helpful messages like this and an even easier way to accept their suggestions.  Click on the light bulb and the click the option <em>Join declaration and assignment</em>:</p>
+<p><img src="img/14.png" alt=""></p>
+<p>The code should be refactored for you and the warning message should be gone.  </p>
+<p>The above demonstrated that you can defer the initialisation of a <em>val</em> variable until later, but it may not be the best style depending on the situation.  An example where it is good style...if you were reading in the value from the user, you wouldn&#39;t get this warning message displayed.</p>
+<h2>val - cannot change value</h2>
+<p>Staying with the same variable we were updating above (bChar), add this line of code just before printing out the value:</p>
+<pre><code>   bChar = &#39;B&#39;</code></pre>
+<p>Your code should now look like this, inclusive of the syntax error:</p>
+<p><img src="img/15.png" alt=""></p>
+<p><em>bChar</em> is an immutable variable and cannot be reassigned.<br>Delete this line of code we just added.</p>
+<h2>var - mutable variables</h2>
+<p>At the end of the main function, declare a mutable variable:</p>
+<pre><code>    //mutable variable
+    var number = 5   //Int type is inferred</code></pre>
+<p>As the value is allowed to change in <em>var</em> variables, you can do mathematical operations:</p>
+<pre><code>    number ++;       //mathematical operations are allowed
+    println(&quot;number: &quot; + number)</code></pre>
+<p>and reassignment:</p>
+<pre><code>    number = 3;       //Allowed to reassign a var too
+    println(&quot;number: &quot; + number)</code></pre>
+<p>Save your work and keep the project open.</p>
 
           </div>
         
           <div class="ui tab segment lab" data-tab="05">
-            <h1>functions</h1>
-<p>todo </p>
+            <h1>functions (without parameters)</h1>
+<p>We will continue working in the <em>types</em> project from the previous steps.</p>
+<p>Having worked though this lab, your main function will be quite large e.g. you will have something similar to this:</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+
+    println(&quot;Working with Variables and Types&quot;)
+
+    //Variables in kotlin and their types
+
+    val doubleNumber = 1200.45
+    val floatNumber = 700.78f
+    val longNumber = 98765432L
+    val intNumber = 123456
+    val shortNumber = 345
+    val byteNumber = 127
+
+    println(&quot;doubleNumber value is: &quot; + doubleNumber + &quot;, and the type is: &quot; + doubleNumber.javaClass)
+    println(&quot;floatNumber value is:  &quot; + floatNumber + &quot;, and the type is: &quot; + floatNumber.javaClass)
+    println(&quot;longNumber value is:   &quot; + longNumber + &quot;, and the type is: &quot; + longNumber.javaClass)
+    println(&quot;intNumber value is:    &quot; + intNumber + &quot;, and the type is: &quot; + intNumber.javaClass)
+    println(&quot;shortNumber value is:  &quot; + shortNumber + &quot;, and the type is: &quot; + shortNumber.javaClass)
+    println(&quot;byteNumber value is:   &quot; + byteNumber + &quot;, and the type is: &quot; + byteNumber.javaClass)
+
+
+    //underscores make number values more readable in code
+
+    println(&quot;\nUsing underscores to make values more readable:&quot;)
+    val oneMillion = 1_000_000
+    val threeThousand = 3_000
+    val creditCardNumber = 1234_4321_5678_8765
+
+    println(&quot;\t&quot; + oneMillion + &quot; - the type is: &quot; + oneMillion.javaClass)
+    println(&quot;\t&quot; + threeThousand + &quot; - the type is: &quot; + threeThousand.javaClass)
+    println(&quot;\t&quot; + creditCardNumber + &quot; - the type is: &quot; + creditCardNumber.javaClass)
+
+
+    //explicit conversion of value
+
+    val byteNum: Byte = 10              //static type check: OK
+    val intNum: Int = byteNum.toInt()   //explicit conversion: OK
+    val floatNum: Float = byteNum.toFloat()
+    val doubleNum: Double = intNum.toDouble()
+
+
+    //characters in kotlin
+    val aChar = &#39;a&#39;            //type inference
+    val bChar: Char = &#39;b&#39;   //explicitly defining the type
+
+    println(&quot;aChar: &quot; + aChar + &quot; - the type is: &quot; + aChar.javaClass)
+    println(&quot;bChar: &quot; + bChar + &quot; - the type is: &quot; + bChar.javaClass)
+
+
+    //booleans in kotlin
+    val aFlag = true
+    val bFlag: Boolean = false
+
+    println(&quot;aFlag: &quot; + aFlag + &quot; - the type is: &quot; + aFlag.javaClass)
+    println(&quot;bFlag: &quot; + bFlag + &quot; - the type is: &quot; + bFlag.javaClass)
+
+
+    //mutable variables
+    var number = 5   //Int type is inferred
+    number ++;       //mathematical operations are allowed
+    println(&quot;number: &quot; + number)
+    number = 3;       //Allowed to reassign a var too
+    println(&quot;number: &quot; + number)
+
+}</code></pre>
+<p>In this and the following step, we are going to create new functions in main.kt, some of which take parameters and some of which don&#39;t.  </p>
+<h2>factory reset!!!</h2>
+<p>Delete all the statements in your <em>fun main</em>, but leave the function declaration i.e. :</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+}</code></pre>
+<h2>Your First function without parameters</h2>
+<p>First, we will add a new function called <em>typeInference</em> that doesn&#39;t take any parameters...type this code:</p>
+<pre><code>fun typeInference() {
+
+}</code></pre>
+<p>Then cut and paste the following code into this function:</p>
+<pre><code>    println (&quot;\n==========================================================&quot;)
+    println (&quot;============  Using Type Inference in Kotlin =============&quot;)
+    println (&quot;==========================================================&quot;)
+
+    val doubleNumber = 1200.45
+    val floatNumber = 700.78f
+    val longNumber = 98765432L
+    val intNumber = 123456
+    val shortNumber = 345
+    val byteNumber = 127
+
+    println(&quot;doubleNumber value is: &quot; + doubleNumber + &quot;, and the type is: &quot; + doubleNumber.javaClass)
+    println(&quot;floatNumber value is:  &quot; + floatNumber + &quot;, and the type is: &quot; + floatNumber.javaClass)
+    println(&quot;longNumber value is:   &quot; + longNumber + &quot;, and the type is: &quot; + longNumber.javaClass)
+    println(&quot;intNumber value is:    &quot; + intNumber + &quot;, and the type is: &quot; + intNumber.javaClass)
+    println(&quot;shortNumber value is:  &quot; + shortNumber + &quot;, and the type is: &quot; + shortNumber.javaClass)
+    println(&quot;byteNumber value is:   &quot; + byteNumber + &quot;, and the type is: &quot; + byteNumber.javaClass)</code></pre>
+<p>Now let&#39;s call this new function from the <em>main</em> function:</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+    typeInference()
+}</code></pre>
+<p>Run the code...you should get output similar to this:</p>
+<pre><code>==========================================================
+============  Using Type Inference in Kotlin =============
+==========================================================
+doubleNumber value is: 1200.45, and the type is: double
+floatNumber value is:  700.78, and the type is: float
+longNumber value is:   98765432, and the type is: long
+intNumber value is:    123456, and the type is: int
+shortNumber value is:  345, and the type is: int
+byteNumber value is:   127, and the type is: int</code></pre>
+<h2>Another function that doesn&#39;t take parameters</h2>
+<p>Add another function called <em>usingUnderscores</em> that doesn&#39;t take any parameters.</p>
+<p>Then cut and paste the following code into this function:</p>
+<pre><code>    println (&quot;\n==========================================================&quot;)
+    println (&quot;=========  Using underscores in numeric values ===========&quot;)
+    println (&quot;==========================================================&quot;)
+
+    //underscores make number values more readable in code
+
+    println(&quot;\nUsing underscores to make values more readable:&quot;)
+    val oneMillion = 1_000_000
+    val threeThousand = 3_000
+    val creditCardNumber = 1234_4321_5678_8765
+
+    println(&quot;\t&quot; + oneMillion + &quot; - the type is: &quot; + oneMillion.javaClass)
+    println(&quot;\t&quot; + threeThousand + &quot; - the type is: &quot; + threeThousand.javaClass)
+    println(&quot;\t&quot; + creditCardNumber + &quot; - the type is: &quot; + creditCardNumber.javaClass)
+    println()</code></pre>
+<p>And call the new function from the <em>main</em> function.</p>
+<p>Run the code...you should get output similar to this:</p>
+<pre><code>==========================================================
+============  Using Type Inference in Kotlin =============
+==========================================================
+doubleNumber value is: 1200.45, and the type is: double
+floatNumber value is:  700.78, and the type is: float
+longNumber value is:   98765432, and the type is: long
+intNumber value is:    123456, and the type is: int
+shortNumber value is:  345, and the type is: int
+byteNumber value is:   127, and the type is: int
+
+
+==========================================================
+=========  Using underscores in numeric values ===========
+==========================================================
+
+Using underscores to make values more readable:
+    1000000 - the type is: int
+    3000 - the type is: int
+    1234432156788765 - the type is: long</code></pre>
+<h2>And another function that doesn&#39;t take parameters</h2>
+<p>Add a third function called <em>booleansAndCharacters</em> that doesn&#39;t take any parameters.</p>
+<p>Then cut and paste the following code into this function:</p>
+<pre><code>    println (&quot;\n==========================================================&quot;)
+    println (&quot;================  Booleans and Characters ================&quot;)
+    println (&quot;==========================================================&quot;)
+
+    //characters in kotlin
+    val aChar = &#39;a&#39;            //type inference
+    val bChar: Char = &#39;b&#39;   //explicitly defining the type
+    println(&quot;aChar: &quot; + aChar + &quot; - the type is: &quot; + aChar.javaClass)
+    println(&quot;bChar: &quot; + bChar + &quot; - the type is: &quot; + bChar.javaClass)
+
+
+    //booleans in kotlin
+    val aFlag = true
+    val bFlag: Boolean = false
+    println(&quot;aFlag: &quot; + aFlag + &quot; - the type is: &quot; + aFlag.javaClass)
+    println(&quot;bFlag: &quot; + bFlag + &quot; - the type is: &quot; + bFlag.javaClass)
+
+    println()</code></pre>
+<p>And call the new function from the <em>main</em> function.</p>
+<p>Run the code...you should get output similar to this:</p>
+<pre><code>==========================================================
+============  Using Type Inference in Kotlin =============
+==========================================================
+doubleNumber value is: 1200.45, and the type is: double
+floatNumber value is:  700.78, and the type is: float
+longNumber value is:   98765432, and the type is: long
+intNumber value is:    123456, and the type is: int
+shortNumber value is:  345, and the type is: int
+byteNumber value is:   127, and the type is: int
+
+
+==========================================================
+=========  Using underscores in numeric values ===========
+==========================================================
+
+Using underscores to make values more readable:
+    1000000 - the type is: int
+    3000 - the type is: int
+    1234432156788765 - the type is: long
+
+
+==========================================================
+================  Booleans and Characters ================
+==========================================================
+aChar: a - the type is: char
+bChar: b - the type is: char
+aFlag: true - the type is: boolean
+bFlag: false - the type is: boolean</code></pre>
+<p>Save your code.  In the next step, we will look at adding functions that take parameters.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="06">
+            <h1>functions (with parameters)</h1>
+<p>We will continue working in the <em>types</em> project from the previous steps.</p>
+<p>We will now work on functions that take parameters. </p>
+<h2>Your First function WITH parameters</h2>
+<p>Add a new function called <em>explicitConversions</em> that takes one parameter of type Byte:</p>
+<pre><code>fun explicitConversions(inputByte : Byte){
+
+}</code></pre>
+<p>Try removing <em>Byte</em> from the parameter list above...what happened?  What&#39;s the generated error in IntelliJ?  Does it make sense to you why you must provide a type here?  Put back in the declared type. </p>
+<p>Now cut and paste the following code into this function:</p>
+<pre><code>    println (&quot;\n==========================================================&quot;)
+    println (&quot;=================  Explicit Conversions ==================&quot;)
+    println (&quot;==========================================================&quot;)
+
+    val byteNum: Byte = inputByte       //static type check: OK
+    val intNum: Int = byteNum.toInt()   //explicit conversion: OK
+    val floatNum: Float = byteNum.toFloat()
+    val doubleNum: Double = intNum.toDouble()
+
+    println(&quot;byteNum: &quot;   + byteNum)
+    println(&quot;intNum: &quot;    + intNum)
+    println(&quot;floatNum: &quot;  + floatNum)
+    println(&quot;doubleNum: &quot; + doubleNum)
+
+    println()</code></pre>
+<p>Read the above code...can you see where the parameter is used in the code? </p>
+<p>And call the new function from the <em>main</em> function, passing 25 as the actual parameter.</p>
+<p>Run the code...along with the output from the previous function calls, you should have output similar to this:</p>
+<pre><code>==========================================================
+=================  Explicit Conversions ==================
+==========================================================
+byteNum: 25
+intNum: 25
+floatNum: 25.0
+doubleNum: 25.0</code></pre>
+<h2>A function WITH two parameters</h2>
+<p>Add a new function called <em>mutableVariables</em> that takes two parameters, both of type Int:</p>
+<pre><code>fun mutableVariables (input: Int, updatedNumber: Int){
+
+}</code></pre>
+<p>Now cut and paste the following code into this function:</p>
+<pre><code>    println (&quot;\n==========================================================&quot;)
+    println (&quot;===========  Working with Mutable Variables =============&quot;)
+    println (&quot;==========================================================&quot;)
+
+    //mutable variables
+    var number = input   //Int type is inferred
+
+    number++;       //mathematical operations are allowed
+    println(&quot;number: &quot; + number)
+
+    number = updatedNumber;       //Allowed to reassign a var too
+    println(&quot;number: &quot; + number)
+
+    println()</code></pre>
+<p>Read the above code...can you see where the parameters are used in the code? </p>
+<p>And call the new function from the <em>main</em> function, passing 10 and 20 as the actual parameter value.</p>
+<p>Run the code...along with the output from the previous function calls, you should have output similar to this:</p>
+<pre><code>==========================================================
+===========  Working with Mutable Variables =============
+==========================================================
+number: 11
+number: 20</code></pre>
+<p>Save your code.</p>
 
           </div>
         
           <div class="ui tab segment lab" data-tab="Exercises">
             <h1>Exercise</h1>
+<p>?????</p>
+<h2>Lab is Complete!</h2>
+<p>You are now finished your introduction to Kotlin.  If you have time to spare, try adding more functions and experiment with the constructs we covered in this lab.</p>
+<p>?????</p>
 <h2>Exercise 1: Placemaker app</h2>
 <p>todo...create a new placemaker app that displays a console menu (prototype...no engine behind the options...will add engine next week when we look at control flow).</p>
 
