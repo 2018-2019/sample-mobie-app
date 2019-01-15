@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../../index.html"> Labs  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab-02 Control Flow">
+          Lab-02 Control Flow
+        </a>
+      
+        <a class="item" data-tab="01">
+          01
+        </a>
+      
+        <a class="item" data-tab="02">
+          02
+        </a>
+      
+        <a class="item" data-tab="03">
+          03
+        </a>
+      
+        <a class="item" data-tab="04">
+          04
+        </a>
+      
+        <a class="item" data-tab="05">
+          05
+        </a>
+      
+        <a class="item" data-tab="06">
+          06
+        </a>
+      
+        <a class="item" data-tab="07">
+          07
+        </a>
+      
+        <a class="item" data-tab="08">
+          08
+        </a>
+      
+        <a class="item" data-tab="Exercises">
+          Exercises
+        </a>
+      
+        <a class="item" data-tab="Solution">
+          Solution
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-00-overview/unit-0/book-00-studio/index.html">Lab-00 Studio </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-01-intro-to-kotlin/index.html">Lab-01 Kotlin </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-02-control-flow/index.html">Lab-02 Control Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-02-activity/unit-02b-android-activitiy/book-01-activity/index.html">Lab-04 Activities </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-03-adapters/unit-03b-android-adapters/book-01-adapters/index.html">Lab-05 Adapters </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-04-models/unit-04b-android-models/book-01-models/index.html">Lab-06 Models </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-05-images/unit-05b-images/book-01-images/index.html">Lab-07 Images </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-06-map-activity/unit-06b-map-activity/book-01-maps/index.html">Lab-08 MapActivity </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-07-persistence/unit-07b-json/book-01-json/index.html">Lab-09 JSON </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-08-layouts/unit-08b-map-view/book-01-map-view/index.html">Lab-10 MapView </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-09-location/unit-09b-location/book-1-location/index.html">Lab-11a Location </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-09-location/unit-09c/book-2-location/index.html">Lab-11b Tracking </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab-02 Control Flow">
+            <h1>Objectives</h1>
+<p>Introduction to Control Flow in Kotlin and also Strings and Null Safety. </p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="01">
+            <h1>if (statement and expression)</h1>
+<p>In this part of the lab, we will work on the syntax for flow of control in our kotlin programs, focusing on the <em>if</em> as a statement and also as an expression.</p>
+<h2>New Project in IntelliJ</h2>
+<p>In IntelliJ, create a new project.  When the <em>New Project</em> window appears, remember to choose:</p>
+<ul>
+<li><em>Gradle</em> and </li>
+<li>under <em>Additional Libraries and Frameworks</em>, check both <em>Java</em> and <em>Kotlin (Java)</em>.</li>
+</ul>
+<p>Use the following credentials for your new project:</p>
+<p><img src="img/01.png" alt=""></p>
+<p>and ensure that the chosen location for your project is ok:</p>
+<p><img src="img/02.png" alt=""></p>
+<p>Gradle will start downloading required dependencies.</p>
+<h2>New Kotlin Class</h2>
+<p>Right click on the <em>src/main/kotlin</em> directory and, when the context menu appears, select <em>New</em> followed by <em>Kotlin Class/File</em>.</p>
+<p>When the window appears, enter the class name in the format of <em>packagename.classname</em> i.e. <strong>ie.wit.controlflow.main</strong> and click ok.</p>
+<h2>if as a statement</h2>
+<p>Enter the following code into this new file:</p>
+<pre><code>fun main() {
+    maxOf(4, 6)
+}
+
+fun maxOf(a: Int, b: Int) {
+    val max: Int
+
+    //traditional way to write if (as a statement)
+    if (a &gt; b) {
+        max = a
+        print(&quot;a is greater than b.  The max number is &quot; + max)
+    } else {
+        max = b
+        print(&quot;b is greater than a.  The max number is &quot; + max)
+    }
+}</code></pre>
+<p>Run the code.  You should have output similar to this:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is 6</em></p>
+</blockquote>
+<p>This is the traditional form of if-statement that we are used to in Java.</p>
+<h2>Method with return type</h2>
+<p>We are going to rewrite the above code so that we don&#39;t store the maximum value in the local variable <em>max</em>...instead we will return the max value to the <em>main</em> method and print it out from there.</p>
+<p>Refactor your code so that it now looks like this:</p>
+<pre><code>fun main() {
+    println(&quot;The max number is: &quot; + maxOf(4, 6));
+}
+
+fun maxOf(a: Int, b: Int) : Int {
+
+    //traditional way to write if (as a statement)
+    if (a &gt; b) {
+        return a
+    } else {
+        return b
+    }
+}</code></pre>
+<p>Note in the code above that we explicitly define a return type for a method by including a colon followed by a type i.e.  <strong>: Int</strong></p>
+<p>When you run this code, you should have something like this printed to the console:</p>
+<blockquote>
+<p><em>The max number is: 6</em></p>
+</blockquote>
+<h2>if as an expression</h2>
+<p>In Kotlin, the <strong>if</strong> is an expression, i.e. it returns a value. Therefore there is no ternary operator (condition ? then : else), because ordinary if works fine in this role.</p>
+<p>As the <strong>if</strong> is an expression in Kotlin, we can rewrite our <strong>maxOf</strong> method like so:</p>
+<pre><code>//if as an expression
+fun maxOf(a: Int, b: Int) =  if (a &gt; b) a else b</code></pre>
+<p>Run this code and you should see there is no change in the output.  </p>
+<h2>if as an expression (with code blocks)</h2>
+<p>When we first started this step, we printed out whether <em>a</em> was greater than <em>b</em>. We are going to put that code back in now into our <em>if</em> (as an expression).</p>
+<p>Refactor your <em>maxOf</em> method so that your <em>if</em> expression has code blocks:</p>
+<pre><code>//if as an expression
+fun maxOf(a: Int, b: Int) =
+    if (a &gt; b) {
+        print(&quot;a is greater than b.  &quot;)
+        a
+    }else {
+        print(&quot;b is greater than a.  &quot;)
+        b
+    }</code></pre>
+<p>When you run the code, you should now have the following output printed to the console:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is: 6</em></p>
+</blockquote>
+<h2>if as an expression (else is mandatory)</h2>
+<p>Try remove the else code block from the <em>maxOf</em> method.  The following error should be generated:</p>
+<p><img src="img/03.png" alt=""></p>
+<p>When an <em>if</em> is used as an expression, the <em>else</em> portion is mandatory.</p>
+<p>Save your work, but keep the project open.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="02">
+            <h1>when (switch in Java)</h1>
+<p>Continuing with kotlin flow of control, we will now look at the <em>when</em> construct.</p>
+<p>Currently your main class should look like this:</p>
+<pre><code>fun main() {
+    println(&quot;The max number is: &quot; + maxOf(4, 6));
+}
+
+//if as an expression
+fun maxOf(a: Int, b: Int) =
+    if (a &gt; b) {
+        print(&quot;a is greater than b.  &quot;)
+        a
+    }else {
+        print(&quot;b is greater than a.  &quot;)
+        b
+    }</code></pre>
+<p>We will now add <em>when</em> functionality to it.</p>
+<h2>when</h2>
+<p>The <em>when</em> construct is equivalent to <em>switch</em> in Java, but it is more powerful.  Type in the following code into your <em>main</em> class:</p>
+<pre><code>//when construct
+fun printValue(value : Int){
+    when(value){
+        1 -&gt; println (&quot;The value is One&quot;)
+        2 -&gt; println (&quot;The value is Two&quot;)
+        in 3..5 -&gt; println (&quot;The value is between Three and Five&quot;)
+        else -&gt; {
+            println (&quot;The value is: &quot; + value)
+        }
+    }</code></pre>
+<p>In particular, note the <em>range</em> operator e.g. 3..5
+Also note that there is an <em>else</em> portion included.  We should include our curly brackets with the else (a warning is generated otherwise).</p>
+<p>Run this code by adding the following function call as the last statement in your main function:</p>
+<pre><code>    printValue(3)</code></pre>
+<p>The following output should be printed to your console:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is: 6</em></p>
+<p><em>The value is between Three and Five</em></p>
+</blockquote>
+<h2>when (combining conditions with a comma)</h2>
+<p>We can combine branch conditions with a comma (update your code with the 6,7,8 case):</p>
+<pre><code>//when construct
+fun printValue(value : Int){
+    when(value) {
+        1 -&gt; println(&quot;The value is One&quot;)
+        2 -&gt; println(&quot;The value is Two&quot;)
+        in 3..5 -&gt; println(&quot;The value is between Three and Five&quot;)
+        6, 7, 8 -&gt; println(&quot;The value is either Six, Seven or Eight&quot;)
+        else -&gt; {
+            println(&quot;The value is: &quot; + value)
+        }
+    }
+}</code></pre>
+<p>and change your method call in <em>main</em> to be <em>printValue (7)</em> so that it invokes your new code.  The following should be printed to the console:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is: 6</em></p>
+<p><em>The value is either Six, Seven or Eight</em></p>
+</blockquote>
+<h2>when (!in and in)</h2>
+<p>We can use <em>!in</em> as well as <em>in</em>.  </p>
+<p>Write the following new function to use these capabilities and invoke it from <em>main</em> using <em>printRange(30)</em>:</p>
+<pre><code>fun printRange(value: Int){
+    when(value){
+        in 1..10 -&gt; println (&quot;Between 1..10&quot;);
+        !in 10..20 -&gt; println (&quot;Outside 10..20&quot;)
+    }
+}</code></pre>
+<p>When you run it, you should have the following output:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is: 6</em></p>
+<p><em>The value is either Six, Seven or Eight</em></p>
+<p><em>Outside 10..20</em></p>
+</blockquote>
+<h2>when (arbitrary expressions as conditions)</h2>
+<p>We can use arbitrary expressions as branch conditions.  </p>
+<p>Write the following new function to use this capability and invoke it from <em>main</em> using <em>printExpressionResult(12, &quot;12&quot;)</em>:</p>
+<pre><code>fun printExpressionResult(numberValue: Int, stringValue: String){
+    when (numberValue){
+        parseInt(stringValue) -&gt; println(&quot;stringValue holds the same number as numberValue&quot;)
+        else -&gt; {
+            println(&quot;stringValue is not the same number as numberValue&quot;)
+        }
+    }
+}</code></pre>
+<p>When you run it, you should have the following output:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is: 6</em></p>
+<p><em>The value is either Six, Seven or Eight</em></p>
+<p><em>Outside 10..20</em></p>
+<p><em>stringValue holds the same number as numberValue</em></p>
+</blockquote>
+<h2>when (!is and is)</h2>
+<p>We can use <em>!is</em> as well as <em>is</em>.  </p>
+<p>Write the following new function to use these capabilities and invoke it from <em>main</em> using <em>printInferredType()</em>:</p>
+<pre><code>fun printInferredType(){
+    val number = 3;
+    when(number){
+        is Int -&gt; println (&quot;My inferred type is Int&quot;)
+    }
+}</code></pre>
+<p>When you run it, you should have the following output:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is: 6</em></p>
+<p><em>The value is either Six, Seven or Eight</em></p>
+<p><em>Outside 10..20</em></p>
+<p><em>stringValue holds the same number as numberValue</em></p>
+<p><em>My inferred type is Int</em></p>
+</blockquote>
+<h2>when (no argument)</h2>
+<p><em>when</em> can also be used as a replacement for an <em>if-else</em> chain. </p>
+<p>If no argument is supplied, the branch conditions are simply boolean expressions, and a branch is executed when its condition is true.</p>
+<p>Write the following new function and invoke it from <em>main</em> and invoke it using <em>printAnimal(&quot;Guinea pig&quot;)</em>:</p>
+<pre><code>fun printAnimal(aString: String){
+    when {
+        aString.equals(&quot;Dog&quot;) -&gt; println(&quot;A dog&quot;)
+        aString.equals(&quot;Cat&quot;) -&gt; println(&quot;A cat&quot;)
+        aString.contains(&quot;pig&quot;) -&gt; println(&quot;A pig of some sort&quot;)
+        aString.length == 0 -&gt; println(&quot;Empty String..no Animal&quot;)
+        else -&gt; {
+            println(&quot;No identifiable animal&quot;)
+        }
+    }
+}</code></pre>
+<p>When you run it, you should have the following output:</p>
+<blockquote>
+<p><em>b is greater than a.  The max number is: 6</em></p>
+<p><em>The value is either Six, Seven or Eight</em></p>
+<p><em>Outside 10..20</em></p>
+<p><em>stringValue holds the same number as numberValue</em></p>
+<p><em>My inferred type is Int</em></p>
+<p><em>A pig of some sort</em></p>
+</blockquote>
+<p>Change the invoking of the method to ensure that another branch is invoked when you run the code e.g. <strong>printAnimal(&quot;&quot;)</strong>, <strong>printAnimal(&quot;elephant&quot;)</strong></p>
+<p>Save your work, but keep the project open.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="03">
+            <h1>when (as an expression)</h1>
+<p>Continuing with kotlin flow of control, we will now look at the <em>when</em> construct as an expression.</p>
+<h2>when (as an expression)</h2>
+<p>Just like we did with the <em>if</em>, we can use <em>when</em> as an expression.  </p>
+<p>First enter the following function to your code:</p>
+<pre><code>fun describe(obj: Any): String {
+
+    var result : String = when (obj){
+        1 -&gt; &quot;One&quot;
+        &quot;Hello&quot; -&gt; &quot;A Greeting&quot;
+        is Long -&gt; &quot;Long Var&quot;
+        !is String -&gt; &quot;Not a String&quot;
+        else -&gt; &quot;Unknown&quot;
+    }
+
+    return result
+}</code></pre>
+<p>And add the following function calls to your <em>main</em> function:</p>
+<pre><code>    println(describe(1))
+    println(describe(&quot;Hello&quot;))
+    println(describe(1000L))
+    println(describe(2))
+    println(describe(&quot;other&quot;))</code></pre>
+<p>The last few lines of your console output should now be:</p>
+<blockquote>
+<p><em>One</em></p>
+<p><em>A Greeting</em></p>
+<p><em>Long Var</em></p>
+<p><em>Not a String</em></p>
+<p><em>Unknown</em></p>
+</blockquote>
+<p>Now let&#39;s enhance this new function by eliminating the <em>result</em> variable (try use IntelliJs Alt+Enter to make this change) :</p>
+<pre><code>fun describe(obj: Any): String {
+
+    return when (obj){
+        1 -&gt; &quot;One&quot;
+        &quot;Hello&quot; -&gt; &quot;A Greeting&quot;
+        is Long -&gt; &quot;Long Var&quot;
+        !is String -&gt; &quot;Not a String&quot;
+        else -&gt; &quot;Unknown&quot;
+    }
+}</code></pre>
+<p>Run your code again...you should have the same output as above.</p>
+<p>Now let&#39;s reduce our code even further:</p>
+<pre><code>fun describe(obj: Any): String = when (obj){
+        1 -&gt; &quot;One&quot;
+        &quot;Hello&quot; -&gt; &quot;A Greeting&quot;
+        is Long -&gt; &quot;Long Var&quot;
+        !is String -&gt; &quot;Not a String&quot;
+        else -&gt; &quot;Unknown&quot;
+    }</code></pre>
+<p>Run your code again...you should have the same output as above.</p>
+<h2>Refactoring some other functions to have a return type</h2>
+<p>We will now use IntelliJ&#39;s yellow lightbulb to refactor some of our functions so that our <em>when</em> constructs are expressions, like the <em>describe</em> function above.</p>
+<p>Currently the <em>printAnimal</em> method looks like this:</p>
+<pre><code>fun printAnimal(aString: String){
+    when {
+        aString.equals(&quot;Dog&quot;) -&gt; println(&quot;A dog&quot;)
+        aString.equals(&quot;Cat&quot;) -&gt; println(&quot;A cat&quot;)
+        aString.contains(&quot;pig&quot;) -&gt; println(&quot;A pig of some sort&quot;)
+        aString.length == 0 -&gt; println(&quot;Empty String..no Animal&quot;)
+        else -&gt; {
+            println(&quot;No identifiable animal&quot;)
+        }
+    }
+}</code></pre>
+<p>Hover your mouse over the function <em>printAnimal</em>.  When the yellow lightbulb appears, click on it.  Select the option <em>Convert to expression body</em>.  Your code should now be:</p>
+<pre><code>fun printAnimal(aString: String) = when {
+    aString.equals(&quot;Dog&quot;) -&gt; println(&quot;A dog&quot;)
+    aString.equals(&quot;Cat&quot;) -&gt; println(&quot;A cat&quot;)
+    aString.contains(&quot;pig&quot;) -&gt; println(&quot;A pig of some sort&quot;)
+    aString.length == 0 -&gt; println(&quot;Empty String..no Animal&quot;)
+    else -&gt; {
+        println(&quot;No identifiable animal&quot;)
+    }
+}</code></pre>
+<p>Now make the following changes so that the method isn&#39;t printing to the console, it is returning the String instead:</p>
+<pre><code>fun printAnimal(aString: String) = when {
+    aString.equals(&quot;Dog&quot;) -&gt; &quot;A dog&quot;
+    aString.equals(&quot;Cat&quot;) -&gt; &quot;A cat&quot;
+    aString.contains(&quot;pig&quot;) -&gt; &quot;A pig of some sort&quot;
+    aString.length == 0 -&gt; &quot;Empty String..no Animal&quot;
+    else -&gt; &quot;No identifiable animal&quot;
+}</code></pre>
+<p>Lastly, you will need to update the call to this method from <em>printAnimal(&quot;elephant&quot;)</em> to <em>println(printAnimal(&quot;elephant&quot;))</em></p>
+<p>Run your code to make sure all is working as expected with this function.  </p>
+<p>Then repeat this process for the following functions:</p>
+<ul>
+<li>printExpressionResult</li>
+<li>printValue</li>
+</ul>
+<p>You are probably noticing that this makes your code much cleaner looking.</p>
+<p>Save your work, but keep the project open.</p>
+<h2>Solution - so far</h2>
+<p>If you need it, the solution to this step is here:</p>
+<pre><code>import java.lang.Integer.parseInt
+
+fun main() {
+    println(&quot;The max number is: &quot; + maxOf(4, 6))
+    println(printValue(7))
+    printRange(30)
+    println(printExpressionResult(12, &quot;12&quot;))
+    printInferredType()
+    println(printAnimal(&quot;elephant&quot;))
+    println(describe(1))
+    println(describe(&quot;Hello&quot;))
+    println(describe(1000L))
+    println(describe(2))
+    println(describe(&quot;other&quot;))
+}
+
+//if as an expression
+fun maxOf(a: Int, b: Int) =
+    if (a &gt; b) {
+        print(&quot;a is greater than b.  &quot;)
+        a
+    }else {
+        print(&quot;b is greater than a.  &quot;)
+        b
+    }
+
+//when construct
+fun printValue(value : Int) = when(value) {
+    1 -&gt; &quot;The value is One&quot;
+    2 -&gt; &quot;The value is Two&quot;
+    in 3..5 -&gt; &quot;The value is between Three and Five&quot;
+    6, 7, 8 -&gt; &quot;The value is either Six, Seven or Eight&quot;
+    else -&gt; &quot;The value is: &quot; + value
+}
+
+fun printRange(value: Int){
+    when(value){
+        in 1..10 -&gt; println (&quot;Between 1..10&quot;)
+        !in 10..20 -&gt; println (&quot;Outside 10..20&quot;)
+    }
+}
+
+fun printExpressionResult(numberValue: Int, stringValue: String) = when (numberValue){
+    parseInt(stringValue) -&gt;  &quot;stringValue holds the same number as numberValue&quot;
+    else -&gt; &quot;stringValue is not the same number as numberValue&quot;
+}
+
+fun printInferredType(){
+    val number = 3
+    when(number){
+        is Int -&gt; println (&quot;My inferred type is Int&quot;)
+    }
+}
+
+fun printAnimal(aString: String) = when {
+    aString.equals(&quot;Dog&quot;) -&gt; &quot;A dog&quot;
+    aString.equals(&quot;Cat&quot;) -&gt; &quot;A cat&quot;
+    aString.contains(&quot;pig&quot;) -&gt; &quot;A pig of some sort&quot;
+    aString.length == 0 -&gt; &quot;Empty String..no Animal&quot;
+    else -&gt; &quot;No identifiable animal&quot;
+}
+
+fun describe(obj: Any): String = when (obj){
+        1 -&gt; &quot;One&quot;
+        &quot;Hello&quot; -&gt; &quot;A Greeting&quot;
+        is Long -&gt; &quot;Long Var&quot;
+        !is String -&gt; &quot;Not a String&quot;
+        else -&gt; &quot;Unknown&quot;
+}</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="04">
+            <h1>for</h1>
+<p>In our main class, we will add a few more methods to study the <em>for</em> loop syntax.  Note that we are using a <em>List</em> in the code examples below...we will cover this in detail in lab03.</p>
+<h2>for-each loop</h2>
+<p>Add the following method to your main class:</p>
+<pre><code>fun forEachStandard(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (item in items){
+        println(&quot;Item is: &quot; + item)
+    }
+}</code></pre>
+<p>And call it by including this statement as the last statement in the <em>main</em> function:</p>
+<pre><code>    forEachStandard()</code></pre>
+<p>When run, the last few lines of the console output should now be:</p>
+<blockquote>
+<p><em>Item is: apple</em></p>
+<p><em>Item is: banana</em></p>
+<p><em>Item is: kiwi</em></p>
+</blockquote>
+<h2>for-each with indices</h2>
+<p>Add the following method to your main class:</p>
+<pre><code>fun forEachIndices(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (index in items.indices){
+        println(&quot;Item at &quot; + index + &quot; is: &quot; + items[index])
+    }
+}</code></pre>
+<p>And call it by including this statement as the last statement in the <em>main</em> function:</p>
+<pre><code>   forEachIndices()</code></pre>
+<p>When run, the last few lines of the console output should now be:</p>
+<blockquote>
+<p><em>Item at 0 is: apple</em></p>
+<p><em>Item at 1 is: banana</em></p>
+<p><em>Item at 2 is: kiwi</em></p>
+</blockquote>
+<h2>for-each withIndex library function</h2>
+<p>This is another way of accessing the indices like above.</p>
+<p>Add the following method to your main class:</p>
+<pre><code>fun forEachWithIndex(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for ((index, value) in items.withIndex()){
+        println(&quot;The item at &quot; + index + &quot; is: &quot; + value)
+    }
+}</code></pre>
+<p>And call it by including this statement as the last statement in the <em>main</em> function:</p>
+<pre><code>    forEachWithIndex()</code></pre>
+<p>When run, the last few lines of the console output should now be:</p>
+<blockquote>
+<p><em>The item at 0 is: apple</em></p>
+<p><em>The item at 1 is: banana</em></p>
+<p><em>The item at 2 is: kiwi</em></p>
+</blockquote>
+<p>Save your work and keep the project open.</p>
+<h2>Solution - so far</h2>
+<p>If you need it, the completed code so far is here:</p>
+<pre><code>import java.lang.Integer.parseInt
+
+fun main() {
+    println(&quot;The max number is: &quot; + maxOf(4, 6))
+    println(printValue(7))
+    printRange(30)
+    println(printExpressionResult(12, &quot;12&quot;))
+    printInferredType()
+    println(printAnimal(&quot;elephant&quot;))
+    println(describe(1))
+    println(describe(&quot;Hello&quot;))
+    println(describe(1000L))
+    println(describe(2))
+    println(describe(&quot;other&quot;))
+
+    //for loop
+    forEachStandard()
+    forEachIndices()
+    forEachWithIndex()
+}
+
+//if as an expression
+fun maxOf(a: Int, b: Int) =
+    if (a &gt; b) {
+        print(&quot;a is greater than b.  &quot;)
+        a
+    }else {
+        print(&quot;b is greater than a.  &quot;)
+        b
+    }
+
+//when construct
+fun printValue(value : Int) = when(value) {
+    1 -&gt; &quot;The value is One&quot;
+    2 -&gt; &quot;The value is Two&quot;
+    in 3..5 -&gt; &quot;The value is between Three and Five&quot;
+    6, 7, 8 -&gt; &quot;The value is either Six, Seven or Eight&quot;
+    else -&gt; &quot;The value is: &quot; + value
+}
+
+fun printRange(value: Int){
+    when(value){
+        in 1..10 -&gt; println (&quot;Between 1..10&quot;)
+        !in 10..20 -&gt; println (&quot;Outside 10..20&quot;)
+    }
+}
+
+fun printExpressionResult(numberValue: Int, stringValue: String) = when (numberValue){
+    parseInt(stringValue) -&gt;  &quot;stringValue holds the same number as numberValue&quot;
+    else -&gt; &quot;stringValue is not the same number as numberValue&quot;
+}
+
+fun printInferredType(){
+    val number = 3
+    when(number){
+        is Int -&gt; println (&quot;My inferred type is Int&quot;)
+    }
+}
+
+fun printAnimal(aString: String) = when {
+    aString.equals(&quot;Dog&quot;) -&gt; &quot;A dog&quot;
+    aString.equals(&quot;Cat&quot;) -&gt; &quot;A cat&quot;
+    aString.contains(&quot;pig&quot;) -&gt; &quot;A pig of some sort&quot;
+    aString.length == 0 -&gt; &quot;Empty String..no Animal&quot;
+    else -&gt; &quot;No identifiable animal&quot;
+}
+
+fun describe(obj: Any): String = when (obj){
+        1 -&gt; &quot;One&quot;
+        &quot;Hello&quot; -&gt; &quot;A Greeting&quot;
+        is Long -&gt; &quot;Long Var&quot;
+        !is String -&gt; &quot;Not a String&quot;
+        else -&gt; &quot;Unknown&quot;
+}
+
+
+fun forEachStandard(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (item in items){
+        println(&quot;Item is: &quot; + item)
+    }
+}
+
+fun forEachIndices(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (index in items.indices){
+        println(&quot;Item at &quot; + index + &quot; is: &quot; + items[index])
+    }
+}
+
+fun forEachWithIndex(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for ((index, value) in items.withIndex()){
+        println(&quot;The item at &quot; + index + &quot; is: &quot; + value)
+    }
+}</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="05">
+            <h1>while</h1>
+<p>The while and do-while are pretty much the same as Java.</p>
+<h2>while loop</h2>
+<p>Add the following method to your main class:</p>
+<pre><code>fun whileWithList(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    var index = 0
+    while (index &lt; items.size){
+        println (&quot;Item at index: &quot; + index + &quot; is: &quot; +  items[index])
+        index++
+    }
+}</code></pre>
+<p>And call it by including this statement as the last statement in the <em>main</em> function:</p>
+<pre><code>whileWithList()</code></pre>
+<p>When run, the last few lines of the console output should now be:</p>
+<blockquote>
+<p><em>Item at index: 0 is: apple</em></p>
+<p><em>Item at index: 1 is: banana</em></p>
+<p><em>Item at index: 2 is: kiwi</em></p>
+</blockquote>
+<h2>do-while loop</h2>
+<p>Add the following method to your main class:</p>
+<pre><code>fun doWhileExample(){
+    var index = 0
+    do {
+        println(&quot;Do While Index is: &quot; + index)
+        index++
+    } while (index &lt; 5)
+}</code></pre>
+<p>And call it by including this statement as the last statement in the <em>main</em> function:</p>
+<pre><code>  doWhileExample()</code></pre>
+<p>When run, the last few lines of the console output should now be:</p>
+<blockquote>
+<p><em>Do While Index is: 0</em></p>
+<p><em>Do While Index is: 1</em></p>
+<p><em>Do While Index is: 2</em></p>
+<p><em>Do While Index is: 3</em></p>
+<p><em>Do While Index is: 4</em></p>
+</blockquote>
+<p>Save your work and keep the project open.</p>
+<h2>Solution - so far</h2>
+<p>If you need it, the completed code so far is here:</p>
+<pre><code>import java.lang.Integer.parseInt
+
+fun main() {
+    println(&quot;The max number is: &quot; + maxOf(4, 6))
+    println(printValue(7))
+    printRange(30)
+    println(printExpressionResult(12, &quot;12&quot;))
+    printInferredType()
+    println(printAnimal(&quot;elephant&quot;))
+    println(describe(1))
+    println(describe(&quot;Hello&quot;))
+    println(describe(1000L))
+    println(describe(2))
+    println(describe(&quot;other&quot;))
+
+    //for loop
+    forEachStandard()
+    forEachIndices()
+    forEachWithIndex()
+    whileWithList()
+    doWhileExample()
+}
+
+//if as an expression
+fun maxOf(a: Int, b: Int) =
+    if (a &gt; b) {
+        print(&quot;a is greater than b.  &quot;)
+        a
+    }else {
+        print(&quot;b is greater than a.  &quot;)
+        b
+    }
+
+//when construct
+fun printValue(value : Int) = when(value) {
+    1 -&gt; &quot;The value is One&quot;
+    2 -&gt; &quot;The value is Two&quot;
+    in 3..5 -&gt; &quot;The value is between Three and Five&quot;
+    6, 7, 8 -&gt; &quot;The value is either Six, Seven or Eight&quot;
+    else -&gt; &quot;The value is: &quot; + value
+}
+
+fun printRange(value: Int){
+    when(value){
+        in 1..10 -&gt; println (&quot;Between 1..10&quot;)
+        !in 10..20 -&gt; println (&quot;Outside 10..20&quot;)
+    }
+}
+
+fun printExpressionResult(numberValue: Int, stringValue: String) = when (numberValue){
+    parseInt(stringValue) -&gt;  &quot;stringValue holds the same number as numberValue&quot;
+    else -&gt; &quot;stringValue is not the same number as numberValue&quot;
+}
+
+fun printInferredType(){
+    val number = 3
+    when(number){
+        is Int -&gt; println (&quot;My inferred type is Int&quot;)
+    }
+}
+
+fun printAnimal(aString: String) = when {
+    aString.equals(&quot;Dog&quot;) -&gt; &quot;A dog&quot;
+    aString.equals(&quot;Cat&quot;) -&gt; &quot;A cat&quot;
+    aString.contains(&quot;pig&quot;) -&gt; &quot;A pig of some sort&quot;
+    aString.length == 0 -&gt; &quot;Empty String..no Animal&quot;
+    else -&gt; &quot;No identifiable animal&quot;
+}
+
+fun describe(obj: Any): String = when (obj){
+        1 -&gt; &quot;One&quot;
+        &quot;Hello&quot; -&gt; &quot;A Greeting&quot;
+        is Long -&gt; &quot;Long Var&quot;
+        !is String -&gt; &quot;Not a String&quot;
+        else -&gt; &quot;Unknown&quot;
+}
+
+
+fun forEachStandard(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (item in items){
+        println(&quot;Item is: &quot; + item)
+    }
+}
+
+fun forEachIndices(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (index in items.indices){
+        println(&quot;Item at &quot; + index + &quot; is: &quot; + items[index])
+    }
+}
+
+fun forEachWithIndex(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for ((index, value) in items.withIndex()){
+        println(&quot;The item at &quot; + index + &quot; is: &quot; + value)
+    }
+}
+
+fun whileWithList(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    var index = 0
+    while (index &lt; items.size){
+        println (&quot;Item at index: &quot; + index + &quot; is: &quot; +  items[index])
+        index++
+    }
+}
+
+fun doWhileExample(){
+    var index = 0
+    do {
+        println(&quot;Do While Index is: &quot; + index)
+        index++
+    } while (index &lt; 5)
+}</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="06">
+            <h1>Strings</h1>
+<p>Kotlin has two types of string literals:</p>
+<ul>
+<li><em>escaped strings</em> that may have escaped characters in them and </li>
+<li><em>raw strings</em> that can contain newlines and arbitrary text. </li>
+</ul>
+<h2>escaped strings</h2>
+<p>These are very similar to Java strings.  Add the following function to your main class:</p>
+<pre><code>fun workingWithStrings(){
+    val aString = &quot;An escaped string!\n&quot;
+    print(aString)
+}</code></pre>
+<p>And call it by including this statement as the last statement in the <em>main</em> function:</p>
+<pre><code>    whileWithStrings()</code></pre>
+<p>When run, the last line of the console output should now be:</p>
+<blockquote>
+<p><em>An escaped string!</em></p>
+</blockquote>
+<h2>raw strings</h2>
+<p>A raw string is delimited by a triple quote (&quot;&quot;&quot;), contains no escaping and can contain new lines and any other characters.</p>
+<p>Update the workingWithStrings function like so (declaring einstein variable and printing it out):</p>
+<pre><code>fun workingWithStrings(){
+    val aString = &quot;An escaped string!\n&quot;
+    print(aString)
+
+    val einstein = &quot;&quot;&quot;
+        Learn from yesterday
+        Live for today
+        Hope for tomorrow
+        The important thing
+        is not to stop questioning.
+        (Albert Einstein)
+    &quot;&quot;&quot;.trimIndent()
+    println(einstein)
+}</code></pre>
+<p>When run, the last lines of the console output should now be:</p>
+<blockquote>
+<p><em>Learn from yesterday</em></p>
+<p><em>Live for today</em></p>
+<p><em>Hope for tomorrow</em></p>
+<p><em>The important thing</em></p>
+<p><em>is not to stop questioning.</em></p>
+<p><em>(Albert Einstein)</em></p>
+</blockquote>
+<p>Now update the workingWithStrings function like so (declaring franklin variable and printing it out):</p>
+<pre><code>fun workingWithStrings(){
+    val aString = &quot;An escaped string!\n&quot;
+    print(aString)
+
+    val einstein = &quot;&quot;&quot;
+        Learn from yesterday
+        Live for today
+        Hope for tomorrow
+        The important thing
+        is not to stop questioning.
+        (Albert Einstein)
+    &quot;&quot;&quot;.trimIndent()
+    println(einstein)
+
+    val franklin = &quot;&quot;&quot;
+          |Tell me and I forget.
+          |Teach me and I remember.
+          |Involve me and I learn.
+          |  (Benjamin Franklin)
+    &quot;&quot;&quot;.trimMargin()
+    println(franklin)
+}</code></pre>
+<p>When run, the last lines of the console output should now be (note how Benjamin Franklin is indented in your console):</p>
+<blockquote>
+<p><em>Tell me and I forget.</em></p>
+<p><em>Teach me and I remember.</em></p>
+<p><em>Involve me and I learn.</em></p>
+<p><em>&nbsp;&nbsp;(Benjamin Franklin)</em></p>
+</blockquote>
+<p>Save your work and keep the project open.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="07">
+            <h1>String Templates</h1>
+<p>Strings may contain template expressions, i.e. pieces of code that are evaluated and whose results are concatenated into the String. </p>
+<p>A template expression starts with a dollar sign ($) and consists of either a:</p>
+<ul>
+<li>simple name or</li>
+<li>an arbitrary expression in curly braces</li>
+</ul>
+<h2>simple name</h2>
+<p>You should have this method in your main class (if you don&#39;t have it, cut and paste it in...and call it from the main function):</p>
+<pre><code>fun printValue(value : Int) = when(value) {
+    1 -&gt; &quot;The value is One&quot;
+    2 -&gt; &quot;The value is Two&quot;
+    in 3..5 -&gt; &quot;The value is between Three and Five&quot;
+    6, 7, 8 -&gt; &quot;The value is either Six, Seven or Eight&quot;
+    else -&gt; &quot;The value is: &quot; + value
+}</code></pre>
+<p>We are going to convert the <em>else</em> code into using a String template.   To do this, change the else code like so:</p>
+<pre><code>    else -&gt; &quot;The value is: $value&quot;</code></pre>
+<p>Note how the <em>$value</em> is inside the double quotes.  Compare the way this is written with the previous way.</p>
+<p>Let&#39;s try it with another function.  You should have this code in your codebase:</p>
+<pre><code>fun forEachStandard(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (item in items){
+        println(&quot;Item is: &quot; + item)
+    }
+}</code></pre>
+<p>Change the println statement to use String templates (note that IntelliJ is probably giving you a warning and ALT+Enter might change it for you automatically):</p>
+<pre><code>    println(&quot;Item is: $item&quot;)</code></pre>
+<p>Now try use String templates in the println statement here:</p>
+<pre><code>fun forEachWithIndex(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for ((index, value) in items.withIndex()){
+        println(&quot;The item at &quot; + index + &quot; is: &quot; + value)
+    }
+}</code></pre>
+<h2>arbitrary expression</h2>
+<p>To demonstrate this construct, add this new function to your main class:</p>
+<pre><code>fun workingWithTemplates(){
+    var firstString = &quot;This is a String&quot;
+    var secondString = &quot;and this is another String&quot;
+
+    //using simple names
+    println (&quot;Simple names: $firstString $secondString&quot;)
+
+    //using arbitrary expressions in {}
+    println(&quot;Expressions (cases): ${firstString.toUpperCase()} ${secondString.toLowerCase()}&quot;)
+    println(&quot;Expressions (string size): first string is ${firstString.length}&quot;)
+    println(&quot;Expressions (substring): ${firstString.substring(0,2)}&quot;)
+}</code></pre>
+<p>Add this function call as the last statement in your <em>main</em> function:</p>
+<pre><code>   workingWithTemplates()</code></pre>
+<p>The last few statements in the console output should be:</p>
+<blockquote>
+<p><em>Simple names: This is a String and this is another String</em></p>
+<p><em>Expressions (cases): THIS IS A STRING and this is another string</em></p>
+<p><em>Expressions (string size): first string is 16</em></p>
+<p><em>Expressions (substring): Th</em></p>
+</blockquote>
+<p>Save your work and keep the project open.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="08">
+            <h1>Null Safety</h1>
+<p>In Kotlin, the type system distinguishes between references that can hold 
+null (nullable references) and those that cannot (non-null references).</p>
+<p>The Kotlin compiler makes sure you don’t, by accident, operate on a variable that is null.</p>
+<h2>A non-null reference</h2>
+<p>Add a new function to your main class:</p>
+<pre><code>fun nullSafety() {
+    var aString = &quot;abc&quot;
+    val size = aString.length   //this is always going to have a reference
+    aString = null              //syntax error
+}</code></pre>
+<p>You cannot set a non-null reference (i.e. our String) to a null.  This means that we cannot accidentally cause a null pointer exception.  </p>
+<h2>Nullable references</h2>
+<p>But what if we need to set our String to a null?  We will do this now by updating our variable declaration:</p>
+<pre><code>fun nullSafety() {
+    var aString :String? = &quot;abc&quot;
+    val size = aString.length   //now this is a syntax error
+    aString = null              //compiles
+}</code></pre>
+<p>Note that the <em>aString = null</em> statement compiles now, but we have caused a syntax error on line two of the function because variable <em>aString</em> can be null now. </p>
+<p>If you need to have a <em>nullable reference</em> there are many ways around this.  </p>
+<h2>Option 1 (basic if statement)</h2>
+<p>You can explicitly check if <em>aString</em> is null, and handle the two options separately.  Try this now:</p>
+<pre><code>fun nullSafety() {
+    var aString :String? = &quot;abc&quot;
+    val size = if (aString != null) aString.length  else -1
+    aString = null              
+}</code></pre>
+<h2>Option 2 (safe call operator ?.)</h2>
+<p>You can use the safe call operator <strong>?.</strong>.  This returns aString.length if aString is not null, and null otherwise.  Try this now:</p>
+<pre><code>fun nullSafety() {
+    var aString :String? = &quot;abc&quot;
+    aString?.length 
+    aString = null
+}</code></pre>
+<h2>Option 3 (not-null assertion operator)</h2>
+<p>You can use the <strong>!!</strong> Operator.  This forces a call to our function and will return a non-null value of aString or throw an Null Pointer Exception if aString is null.  Use sparingly!  Try this now:</p>
+<pre><code>fun nullSafety() {
+    var aString :String? = &quot;abc&quot;
+    aString!!.length
+    aString = null
+}</code></pre>
+<h2>Option 4 (Elvis operator)</h2>
+<p>If the expression to the left of the Elvis operator <strong>?:</strong> is not null, the elvis operator returns it, otherwise it returns the expression to the right. </p>
+<p>We will use this now in our nullSafety() function:</p>
+<pre><code>fun nullSafety() {
+    var aString :String? = &quot;abc&quot;
+    val size = aString?.length ?: -1
+    aString = null
+}</code></pre>
+<p>Save your work and keep the project open.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Exercises">
+            <h1>Exercises</h1>
+<h2>Exercise 1 (String Templates)</h2>
+<p>There are a few functions that could use String Templates.  Look through the code and update the println statements to use String Templates where possible.</p>
+<h2>Exercise 2:</h2>
+<p>If you have time to spare, try adding more functions and experiment with the constructs we covered in this lab and/or experiment with this kotlin learning resource:</p>
+<p><a href="https://kotlinlang.org/docs/tutorials/koans.html">https://kotlinlang.org/docs/tutorials/koans.html</a></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Solution">
+            <h1>Solution</h1>
+<p>Should you need it, the solution for the lab is here:</p>
+<pre><code>import java.lang.Integer.parseInt
+
+fun main() {
+    println(&quot;The max number is: &quot; + maxOf(4, 6))
+    println(printValue(7))
+    printRange(30)
+    println(printExpressionResult(12, &quot;12&quot;))
+    printInferredType()
+    println(printAnimal(&quot;elephant&quot;))
+    println(describe(1))
+    println(describe(&quot;Hello&quot;))
+    println(describe(1000L))
+    println(describe(2))
+    println(describe(&quot;other&quot;))
+
+    //for loop
+    forEachStandard()
+    forEachIndices()
+    forEachWithIndex()
+    whileWithList()
+    doWhileExample()
+
+    //String Literals and Templates
+    workingWithStrings()
+    workingWithTemplates()
+    nullSafety()
+}
+
+//if as an expression
+fun maxOf(a: Int, b: Int) =
+    if (a &gt; b) {
+        print(&quot;a is greater than b.  &quot;)
+        a
+    }else {
+        print(&quot;b is greater than a.  &quot;)
+        b
+    }
+
+//when construct
+fun printValue(value : Int) = when(value) {
+    1 -&gt; &quot;The value is One&quot;
+    2 -&gt; &quot;The value is Two&quot;
+    in 3..5 -&gt; &quot;The value is between Three and Five&quot;
+    6, 7, 8 -&gt; &quot;The value is either Six, Seven or Eight&quot;
+    else -&gt; &quot;The value is: $value&quot;
+}
+
+fun printRange(value: Int){
+    when(value){
+        in 1..10 -&gt; println (&quot;Between 1..10&quot;)
+        !in 10..20 -&gt; println (&quot;Outside 10..20&quot;)
+    }
+}
+
+fun printExpressionResult(numberValue: Int, stringValue: String) = when (numberValue){
+    parseInt(stringValue) -&gt;  &quot;stringValue holds the same number as numberValue&quot;
+    else -&gt; &quot;stringValue is not the same number as numberValue&quot;
+}
+
+fun printInferredType(){
+    val number = 3
+    when(number){
+        is Int -&gt; println (&quot;My inferred type is Int&quot;)
+    }
+}
+
+fun printAnimal(aString: String) = when {
+    aString.equals(&quot;Dog&quot;) -&gt; &quot;A dog&quot;
+    aString.equals(&quot;Cat&quot;) -&gt; &quot;A cat&quot;
+    aString.contains(&quot;pig&quot;) -&gt; &quot;A pig of some sort&quot;
+    aString.length == 0 -&gt; &quot;Empty String..no Animal&quot;
+    else -&gt; &quot;No identifiable animal&quot;
+}
+
+fun describe(obj: Any): String = when (obj){
+        1 -&gt; &quot;One&quot;
+        &quot;Hello&quot; -&gt; &quot;A Greeting&quot;
+        is Long -&gt; &quot;Long Var&quot;
+        !is String -&gt; &quot;Not a String&quot;
+        else -&gt; &quot;Unknown&quot;
+}
+
+
+fun forEachStandard(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (item in items){
+        println(&quot;Item is: $item&quot;)
+    }
+}
+
+fun forEachIndices(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for (index in items.indices){
+        println(&quot;Item at $index is: $items[index]&quot;)
+    }
+}
+
+fun forEachWithIndex(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    for ((index, value) in items.withIndex()){
+        println(&quot;The item at $index is: $value&quot;)
+    }
+}
+
+fun whileWithList(){
+    val items = listOf(&quot;apple&quot;, &quot;banana&quot;, &quot;kiwi&quot;)
+    var index = 0
+    while (index &lt; items.size){
+        println (&quot;Item at index: $index is: ${items[index]}&quot;)
+        index++
+    }
+}
+
+fun doWhileExample(){
+    var index = 0
+    do {
+        println(&quot;Do While Index is: $index&quot;)
+        index++
+    } while (index &lt; 5)
+}
+
+
+fun workingWithStrings(){
+    val aString = &quot;An escaped string!\n&quot;
+    print(aString)
+
+    val einstein = &quot;&quot;&quot;
+        Learn from yesterday
+        Live for today
+        Hope for tomorrow
+        The important thing
+        is not to stop questioning.
+        (Albert Einstein)
+    &quot;&quot;&quot;.trimIndent()
+    println(einstein)
+
+    val franklin = &quot;&quot;&quot;
+          |Tell me and I forget.
+          |Teach me and I remember.
+          |Involve me and I learn.
+          |  (Benjamin Franklin)
+    &quot;&quot;&quot;.trimMargin()
+    println(franklin)
+}
+
+fun workingWithTemplates(){
+    var firstString = &quot;This is a String&quot;
+    var secondString = &quot;and this is another String&quot;
+
+    //using simple names
+    println (&quot;Simple names: $firstString $secondString&quot;)
+
+    //using arbitrary expressions in {}
+    println(&quot;Expressions (cases): ${firstString.toUpperCase()} ${secondString.toLowerCase()}&quot;)
+    println(&quot;Expressions (string size): first string is ${firstString.length}&quot;)
+    println(&quot;Expressions (substring): ${firstString.substring(0,2)}&quot;)
+}
+
+fun nullSafety() {
+    var aString :String? = &quot;abc&quot;
+    val size = aString?.length ?: -1
+    aString = null
+}</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
