@@ -181,6 +181,13 @@ html, body {
         
           
             <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-03-classes-and-collections/index.html">Lab-03 Classes and Collections </a>
+          
+        
+      
+        
+          
+            <a class="item"
                href="https://2018-2019.github.io/mobile-app//topic-02-activity/unit-02b-android-activitiy/book-01-activity/index.html">Lab-04 Activities </a>
           
         
@@ -255,6 +262,8 @@ html, body {
           <div class="ui tab segment lab" data-tab="01">
             <h1>if (statement and expression)</h1>
 <p>In this part of the lab, we will work on the syntax for flow of control in our kotlin programs, focusing on the <em>if</em> as a statement and also as an expression.</p>
+<h2>Run IntelliJ as an Administrator</h2>
+<p>On the college computers, don&#39;t run IntelliJ as normal.  Instead, run it as Adminisrator by right clicking on the Icon and selecting the option <em>Run as Administrator</em>.</p>
 <h2>New Project in IntelliJ</h2>
 <p>In IntelliJ, create a new project.  When the <em>New Project</em> window appears, remember to choose:</p>
 <ul>
@@ -271,7 +280,7 @@ html, body {
 <p>When the window appears, enter the class name in the format of <em>packagename.classname</em> i.e. <strong>ie.wit.controlflow.main</strong> and click ok.</p>
 <h2>if as a statement</h2>
 <p>Enter the following code into this new file:</p>
-<pre><code>fun main() {
+<pre><code>fun main(args: Array&lt;String&gt;) {
     maxOf(4, 6)
 }
 
@@ -295,7 +304,7 @@ fun maxOf(a: Int, b: Int) {
 <h2>Method with return type</h2>
 <p>We are going to rewrite the above code so that we don&#39;t store the maximum value in the local variable <em>max</em>...instead we will return the max value to the <em>main</em> method and print it out from there.</p>
 <p>Refactor your code so that it now looks like this:</p>
-<pre><code>fun main() {
+<pre><code>fun main(args: Array&lt;String&gt;) {
     println(&quot;The max number is: &quot; + maxOf(4, 6));
 }
 
@@ -347,7 +356,7 @@ fun maxOf(a: Int, b: Int) =
             <h1>when (switch in Java)</h1>
 <p>Continuing with kotlin flow of control, we will now look at the <em>when</em> construct.</p>
 <p>Currently your main class should look like this:</p>
-<pre><code>fun main() {
+<pre><code>fun main(args: Array&lt;String&gt;) {
     println(&quot;The max number is: &quot; + maxOf(4, 6));
 }
 
@@ -578,7 +587,7 @@ fun printValue(value : Int){
 <p>If you need it, the solution to this step is here:</p>
 <pre><code>import java.lang.Integer.parseInt
 
-fun main() {
+fun main(args: Array&lt;String&gt;) {
     println(&quot;The max number is: &quot; + maxOf(4, 6))
     println(printValue(7))
     printRange(30)
@@ -705,7 +714,7 @@ fun describe(obj: Any): String = when (obj){
 <p>If you need it, the completed code so far is here:</p>
 <pre><code>import java.lang.Integer.parseInt
 
-fun main() {
+fun main(args: Array&lt;String&gt;) {
     println(&quot;The max number is: &quot; + maxOf(4, 6))
     println(printValue(7))
     printRange(30)
@@ -847,7 +856,7 @@ fun forEachWithIndex(){
 <p>If you need it, the completed code so far is here:</p>
 <pre><code>import java.lang.Integer.parseInt
 
-fun main() {
+fun main(args: Array&lt;String&gt;) {
     println(&quot;The max number is: &quot; + maxOf(4, 6))
     println(printValue(7))
     printRange(30)
@@ -1175,7 +1184,7 @@ null (nullable references) and those that cannot (non-null references).</p>
 <p>Should you need it, the solution for the lab is here:</p>
 <pre><code>import java.lang.Integer.parseInt
 
-fun main() {
+fun main(args: Array&lt;String&gt;) {
     println(&quot;The max number is: &quot; + maxOf(4, 6))
     println(printValue(7))
     printRange(30)

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../../index.html"> Labs  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab-03 Classes and Collections">
+          Lab-03 Classes and Collections
+        </a>
+      
+        <a class="item" data-tab="01">
+          01
+        </a>
+      
+        <a class="item" data-tab="02">
+          02
+        </a>
+      
+        <a class="item" data-tab="03">
+          03
+        </a>
+      
+        <a class="item" data-tab="04">
+          04
+        </a>
+      
+        <a class="item" data-tab="05">
+          05
+        </a>
+      
+        <a class="item" data-tab="06">
+          06
+        </a>
+      
+        <a class="item" data-tab="07">
+          07
+        </a>
+      
+        <a class="item" data-tab="08">
+          08
+        </a>
+      
+        <a class="item" data-tab="Exercises">
+          Exercises
+        </a>
+      
+        <a class="item" data-tab="Solution">
+          Solution
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-00-overview/unit-0/book-00-studio/index.html">Lab-00 Studio </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-01-intro-to-kotlin/index.html">Lab-01 Kotlin </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-02-control-flow/index.html">Lab-02 Control Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-03-classes-and-collections/index.html">Lab-03 Classes and Collections </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-02-activity/unit-02b-android-activitiy/book-01-activity/index.html">Lab-04 Activities </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-03-adapters/unit-03b-android-adapters/book-01-adapters/index.html">Lab-05 Adapters </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-04-models/unit-04b-android-models/book-01-models/index.html">Lab-06 Models </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-05-images/unit-05b-images/book-01-images/index.html">Lab-07 Images </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-06-map-activity/unit-06b-map-activity/book-01-maps/index.html">Lab-08 MapActivity </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-07-persistence/unit-07b-json/book-01-json/index.html">Lab-09 JSON </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-08-layouts/unit-08b-map-view/book-01-map-view/index.html">Lab-10 MapView </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-09-location/unit-09b-location/book-1-location/index.html">Lab-11a Location </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-09-location/unit-09c/book-2-location/index.html">Lab-11b Tracking </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab-03 Classes and Collections">
+            <h1>Objectives</h1>
+<p>Introduction to Kotlin Classes and Collections. </p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="01">
+            <h1>Writing Classes</h1>
+<p>Some theory first!</p>
+<h2>Fields</h2>
+<p>In Kotlin, classes cannot have fields; they have properties:</p>
+<ul>
+<li><em>var</em> properties are mutable.</li>
+<li><em>val</em> properties cannot be changed.</li>
+</ul>
+<h2>Constructors</h2>
+<p>A class in Kotlin can have a <em>primary constructor</em> and one or more <em>secondary constructors</em>.</p>
+<ul>
+<li>A <em>primary constructor</em> is part of the class header and goes after the class name.  A few examples: </li>
+</ul>
+<pre><code>class Person constructor(firstName: String) 
+{
+
+}</code></pre>
+<pre><code>class Person(firstName: String, lastName: String) 
+{
+
+}</code></pre>
+<pre><code>class Person(val firstName: String, val lastName: String) 
+{
+
+}</code></pre>
+<ul>
+<li>A <em>secondary constructor</em> is prefixed with the keyword <em>constructor</em>.  They are not very common in Kotlin.  An example:</li>
+</ul>
+<pre><code>class Person { 
+
+    constructor(parent: Person) { 
+        parent.children.add(this) 
+    }
+}</code></pre>
+<h2>getters and setters</h2>
+<p>In Kotlin, getters (val and var) and setters (var) are optional and are auto-generated if you do not create them in your program.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="02">
+            <h1>Person Class</h1>
+<p>First let&#39;s create a new project and then start writing a class, Person.</p>
+<h2>Run IntelliJ as an Administrator</h2>
+<p>On the college computers, don&#39;t run IntelliJ as normal.  Instead, run it as Adminisrator by right clicking on the App and selecting the option <em>Run as Administrator</em>.</p>
+<h2>New Project in IntelliJ</h2>
+<p>In IntelliJ, create a new project.  When the <em>New Project</em> window appears, remember to choose:</p>
+<ul>
+<li><em>Gradle</em> and </li>
+<li>under <em>Additional Libraries and Frameworks</em>, check both <em>Java</em> and <em>Kotlin (Java)</em>.</li>
+</ul>
+<p>Use the following credentials for your new project:</p>
+<p><img src="img/01.png" alt=""></p>
+<p>and ensure that the chosen location for your project is ok:</p>
+<p><img src="img/02.png" alt=""></p>
+<p>Gradle will start downloading required dependencies.</p>
+<h2>Create two new Kotlin classes</h2>
+<p>Right click on the <em>src/main/kotlin</em> directory and, when the context menu appears, select <em>New</em> followed by <em>Kotlin Class/File</em>.</p>
+<p>When the window appears, enter the class name in the format of <em>packagename.classname</em> i.e. <strong>ie.wit.classes.main</strong> and click ok.</p>
+<p>Using the same approach, create a second class called <em>Person</em>.</p>
+<h2>Person class</h2>
+<p>Start with entering this code in the Person class i.e. a class definition with a primary constructor for Person that accepts two String parameters.</p>
+<pre><code>class Person(val firstName: String, val lastName: String) {
+
+}</code></pre>
+<h2>Main class</h2>
+<p>In your main class, enter the following code:</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+
+    val person = Person(&quot;Joe&quot;, &quot;Soap&quot;)
+
+    println(&quot;First Name = ${person.firstName}&quot;)
+    println(&quot;Surname = ${person.lastName}&quot;)
+}</code></pre>
+<p>In our main function, we instantiating a <em>person</em> object with a first name of Joe and a last name of Soap.  We are then printing out the contents of these properties.  Note that we are using String Templates that we looked at in lab02 to construct our output.</p>
+<p>Run this code and you should have the following output:</p>
+<p><img src="img/03.png" alt=""></p>
+<h2>A recap on the val property</h2>
+<p>Did you notice that we created both of the properties in Person as <em>val</em> fields. </p>
+<p>Try insert an update of the firstName field before we start printing out i.e.:</p>
+<p><img src="img/04.png" alt=""></p>
+<p>We get a syntax error.  <em>val</em> properties are immutable...i.e. they cannot be updated.  Delete this line of code and move onto the next step.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="03">
+            <h1>Person Constrcutor</h1>
+<p>We will experiment a little here with the <em>primary constructor</em> of the Person class.</p>
+<h2>Person class changes</h2>
+<p>Your Person class currently looks like this...the properties are declared in the primary constructor:</p>
+<pre><code>class Person(val firstName: String, val lastName: String) {
+
+}</code></pre>
+<p>First remove the property declarations to be part of the class i.e.:</p>
+<pre><code>class Person() {
+
+    val firstName: String
+    val lastName: String
+
+}</code></pre>
+<p>This will generate an error, as they need to be initialised.  Now add constructor variables like so and use them to initialise the Person properties (note that prefixing constructor variables with an underscore is standard):</p>
+<pre><code>class Person(_firstName : String, _lastName : String) {
+
+    val firstName = _firstName
+    val lastName = _lastName
+
+}</code></pre>
+<p>Now try run the main function again...your output should be the same i.e.:</p>
+<p><img src="img/03.png" alt=""></p>
+<h2>Constructor with varied parameters</h2>
+<p>Kotlin allows us to use <em>varied</em> parameters in <em>primary constrctors</em>.  If we default a value at constructor level, we can use optional parameters when instantiating objects.  We will try this out now.</p>
+<p>In your main function, change the instantiation of the person object to be (i.e. only one parameter):</p>
+<pre><code>    val person = Person(&quot;Joe)</code></pre>
+<p>This generates a syntax error:</p>
+<p><img src="img/05.png" alt=""></p>
+<p>We have not set up the Person class to have <em>varied</em> parameters yet.  We will do this now.  </p>
+<p>Give a default value for each property in the Person <em>primary constructor</em> i.e.:</p>
+<pre><code>class Person(_firstName : String = &quot;UNKNOWN FIRSTNAME&quot;, _lastName : String = &quot;UNKNOWN LASTNAME&quot;) {
+
+    val firstName = _firstName
+    val lastName = _lastName
+
+}</code></pre>
+<p>Now the syntax error disappears and when we run the code, we should get the following output:</p>
+<p><img src="img/06.png" alt=""></p>
+<h2>init block</h2>
+<p>Now lets add the following <em>init</em> block that will run some code at object creation time:</p>
+<pre><code>class Person(_firstName : String = &quot;UNKNOWN FIRSTNAME&quot;, _lastName : String = &quot;UNKNOWN LASTNAME&quot;) {
+
+    val firstName = _firstName
+    val lastName = _lastName
+
+    //initialisation block
+    init {
+        println(&quot;First Name = ${firstName}&quot;)
+        println(&quot;Surname = ${lastName}&quot;)
+    }
+
+}</code></pre>
+<p>Return the the Main.kt class and delete the println statements.  Also add the two new object instantions with varying parameters e.g.:</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+
+    val person = Person(&quot;Joe&quot;)
+    val person2 = Person(&quot;Joe&quot;, &quot;Murphy&quot;)
+    val person3 = Person()
+
+}</code></pre>
+<p>When you run this code, you should have the following output (the println statements are now called from the <em>init</em> block):</p>
+<p><img src="img/07.png" alt=""></p>
+<h1>val properties</h1>
+<p>All the properties and objects we created above are <em>val</em> i.e. can&#39;t be updated.  What if we want properties that can be updated?  We will do this in the next step when we talk about <em>getters</em> and <em>setters</em>.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="04">
+            <h1>Person (getter and setter)</h1>
+<p>In Kotlin, getters (val and var) and setters (var) are optional and are auto-generated if you do not create them in your program.</p>
+<h2>getters</h2>
+<p>For example, the Person code that we just wrote:</p>
+<pre><code>class Person(_firstName : String = &quot;UNKNOWN FIRSTNAME&quot;, _lastName : String = &quot;UNKNOWN LASTNAME&quot;) {
+
+    val firstName = _firstName
+    val lastName = _lastName
+
+    //initialisation block
+    init {
+        println(&quot;First Name = ${firstName}&quot;)
+        println(&quot;Surname = ${lastName}&quot;)
+    }
+
+}</code></pre>
+<p>is equivalent to (note the explicit declaration of the getters):</p>
+<pre><code>class Person(_firstName : String = &quot;UNKNOWN FIRSTNAME&quot;, _lastName : String = &quot;UNKNOWN LASTNAME&quot;) {
+
+    val firstName = _firstName
+        get() = field
+
+    val lastName = _lastName
+        get() = field
+
+    //initialisation block
+    init {
+        println(&quot;First Name = ${firstName}&quot;)
+        println(&quot;Surname = ${lastName}&quot;)
+    }
+
+}</code></pre>
+<p>Add these getters into your code; IntelliJ will complain that they are redundant code...leave them there for the moment.</p>
+<h2>setters</h2>
+<p>Getters apply to both <em>val</em> and <em>var</em> properties.  Whereas setters only apply to <em>var</em> properties.  </p>
+<p>In your code, change <em>val</em> to <em>var</em> for both firstName and lastName property declarations. </p>
+<p>Now lets add a setter for the lastName field that will convert the last name to uppercase (place it just after the get() for this property):</p>
+<pre><code>var lastName = _lastName
+        get() = field
+        //setter code:
+        set(value){
+            field = value.toUpperCase();
+         }</code></pre>
+<p>Run your code again...the setters is not called at object creation time...i.e. the surname <em>Murphy</em> is NOT all in capitals.  </p>
+<p>In your main function, make the following changes:</p>
+<ul>
+<li>update all the person objects to be <em>var</em> instead of <em>val</em>.</li>
+<li>add the following lines of code as the last statements in your main function (to update the lastName and print it out):</li>
+</ul>
+<pre><code>    person2.lastName = &quot;flynn&quot;
+    println(&quot;Updated Person 2 Surname: ${person2.lastName}&quot;)</code></pre>
+<p>Run your code again and you should have the following output, showing that the setter was called and has converted the updated name to capitals:</p>
+<p><img src="img/08.png" alt=""></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="05">
+            <h1>Data Classes</h1>
+<p>Data classes were created to solely to hold data (i.e. models).</p>
+<p>We can use the data class prefix to simply create a data class.</p>
+<p>The compiler automatically generates methods from the primary constructor such as:</p>
+<ul>
+<li>equals()</li>
+<li>hashCode()</li>
+<li>toString()</li>
+<li>copy()</li>
+</ul>
+<p>We will experiment with a few of these generated methods in this step. </p>
+<h2>Rules for Data Classes</h2>
+<ul>
+<li><p>The primary constructor must have at least one parameter</p>
+</li>
+<li><p>The parameters of the primary constructor must be marked as either var or val</p>
+</li>
+<li><p>The class cannot be open, abstract, inner or sealed</p>
+</li>
+<li><p>The class may extend other classes or implement interfaces</p>
+</li>
+</ul>
+<h2>New Class, Employee</h2>
+<p>We will experiment with Data classes by creating a new class, Employee.  Add the following code to it (note the keyword, <em>data</em> and also note that the parameters of the primary constructor are var):</p>
+<pre><code>data class Employee(var firstName: String, var lastName: String) {
+
+}</code></pre>
+<h2>toString() and copy()</h2>
+<p>In your main function, comment out the lines of code in it and add four new lines of code i.e.:</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+
+   // var person = Person(&quot;Joe&quot;)
+   // var person2 = Person(&quot;Joe&quot;, &quot;Murphy&quot;)
+   // var person3 = Person()
+   // person2.lastName = &quot;flynn&quot;
+   // println(&quot;Updated Person 2 Surname: ${person2.lastName}&quot;)
+
+    val employee1 = Employee(&quot;Mark&quot;, &quot;Roche&quot;)
+    val employee2 = employee1.copy(firstName = &quot;Clare&quot;)
+    println(employee1)
+    println(employee2.toString())
+
+}</code></pre>
+<p>In the above code, we used the generated <em>copy()</em> method to copy one employee contents into another (and replace the first name). </p>
+<p>Run the code.  You can see from the output that there is a toString generated to the Employee.class file:</p>
+<p><img src="img/09.png" alt=""></p>
+<h2>copy(), equals(), hashCode()</h2>
+<p>In your main function, add a third employee object:</p>
+<pre><code>    val employee3 = employee1.copy()</code></pre>
+<p>and add the following code (to demonstrate the use and existance of the generated methods, hashCode and equals):</p>
+<pre><code>    println(&quot;employee1 hashcode = ${employee1.hashCode()}&quot;)
+    println(&quot;employee2 hashcode = ${employee2.hashCode()}&quot;)
+    println(&quot;employee3 hashcode = ${employee3.hashCode()}&quot;)
+
+    if (employee1.equals(employee2))
+        println(&quot;employee1 is equal to employee2.&quot;)
+    else
+        println(&quot;employee1 is not equal to employee2.&quot;)
+
+    if (employee1.equals(employee3))
+        println(&quot;employee1 is equal to employee3.&quot;)
+    else
+        println(&quot;employee1 is not equal to employee3.&quot;)</code></pre>
+<p>When you run the code, you should have the following output:</p>
+<p><img src="img/10.png" alt=""></p>
+<p>Save your work...we will start on a new project in the next step.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="06">
+            <h1>Arrays</h1>
+<p>In this step, we will experiment with Kotlin Arrays.  Arrays in Kotlin can be created using <em>arrayOf()</em> or the <em>Array()</em> constructor.</p>
+<p>Create a new IntelliJ project and call it collections-project.  In this project, create a new class called <em>main</em>. </p>
+<h2>Array - arrayOf()</h2>
+<p>In your Main class, enter the following code:</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+
+  val myArray = arrayOf(4, 5, 6, 7)
+  println(myArray.asList())
+  println(myArray[2])
+
+}</code></pre>
+<p>When you run this code, you should have the following output:</p>
+<pre><code>[4, 5, 6, 7]
+6</code></pre>
+<h2>Array - mixed types</h2>
+<p>Add the following lines of code to the end of your main function:</p>
+<pre><code>    val myMixedArray = arrayOf(4, 5, 6, 7, &quot;mixed&quot;, &quot;types&quot;, &quot;allowed&quot;)
+    println(myMixedArray.asList())
+    println(myMixedArray)</code></pre>
+<p>When you run this code, the last two lines of the output should be:</p>
+<pre><code>[4, 5, 6, 7, mixed, types, allowed]
+[Ljava.lang.Object;@721e0f4f</code></pre>
+<p>In the last line of output, we are interested in the inferred type...Object!  Kotlion allows mixed type arrays.</p>
+<h2>Array - choosing a type</h2>
+<p>Add the following lines of code to the end of your main function:</p>
+<pre><code>    val intArray1    = intArrayOf(4, 5, 6, 7)
+    val intArray2    = arrayOf&lt;Int&gt;(4, 5, 6, 7)
+    val charArray    = charArrayOf(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+    val booleanArray = booleanArrayOf(true, false, true)
+
+    println(&quot;IntArray1 : ${intArray1.asList()} and is type ${intArray1.javaClass.typeName}&quot;)
+    println(&quot;IntArray2 : ${intArray2.asList()} and is type ${intArray2.javaClass.typeName}&quot;)
+    println(&quot;charArray : ${charArray.asList()} and is type ${charArray.javaClass.typeName}&quot;)
+    println(&quot;booleanArray : ${booleanArray.asList()} and is type ${booleanArray.javaClass.typeName}&quot;)</code></pre>
+<p>In these lines of code, we are choosing the type of the array when we create it.</p>
+<p>When you run this code, the last four lines of the output should be:</p>
+<pre><code>IntArray1 : [4, 5, 6, 7] and is type int[]
+IntArray2 : [4, 5, 6, 7] and is type java.lang.Integer[]
+charArray : [a, b, c, d] and is type char[]
+booleanArray : [true, false, true] and is type boolean[]</code></pre>
+<h2>Array - choosing a type - mioxed array</h2>
+<p>When choosing a type for our array, can we have a mixed array?  Let&#39;s try it.</p>
+<p>Add the following two lines of code to the end of your main function:</p>
+<pre><code>    val mixedArray1 = intArrayOf(4, 5, 6, 7, &quot;will&quot;,&quot;not&quot;,&quot;compile&quot;)
+    val mixedArray2 = arrayOf&lt;Int&gt;(4, 5, 6, 7,&quot;will&quot;,&quot;not&quot;,&quot;compile&quot;)</code></pre>
+<p>These will result in a syntax error.  So we cannot have a mixed array in this case!  Delete these two lines of code.</p>
+<h2>Arrays - using a constructor</h2>
+<p>The Array() constructor requires a size and a lambda function.  We will be using lambda functions a fair bit when we move into the Android Framework. </p>
+<p>Add the following lines of code to the end of your main function (note that the second parameter is a lambda function...we will cover more on this later):</p>
+<pre><code>    val intArray = Array(6,  {i -&gt; i * 2} )
+    println (&quot;Array using Constructor: ${intArray.asList()}&quot;)</code></pre>
+<p>When you run this code, the last line of the output should be:</p>
+<pre><code>Array using Constructor: [0, 2, 4, 6, 8, 10]</code></pre>
+<p>Looking at the output, can you figure out what the Lambda function is doing?  Hint: <strong>i</strong> refers to the index.  </p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="07">
+            <h1>Collections</h1>
+<p>Unlike many languages, Kotlin distinguishes between <em>mutable</em> and <em>immutable</em> collections (lists, sets, maps, etc).  Precise control over exactly when collections can be edited is useful for eliminating bugs, and for designing good APIs.</p>
+<ul>
+<li><p><em>immutable</em> - The Kotlin <strong>List&lt;&gt;</strong> type is an interface that provides read-only operations like <em>size</em>, <em>get</em> and so on.  Like in Java, it inherits from <em>Collection&lt;&gt;</em> and that in turn inherits from <em>Iterable&lt;&gt;</em>.  </p>
+</li>
+<li><p><em>mutable</em> - Methods that change the list are added by the <em>MutableList&lt;&gt;</em> interface. </p>
+</li>
+</ul>
+<p>We will be focusing on the <em>List</em> type mainly in this module.</p>
+<h2>mutable list</h2>
+<p>Add the following lines of code to the end of your main function.  This code create a mutable list of fruit, adds an item, changes an item and removes an item:</p>
+<pre><code>    val fruit = mutableListOf(&quot;Banana&quot;, &quot;Kiwifruit&quot;, &quot;Mango&quot;, &quot;Apple&quot;)
+    println(&quot;Mutable List: ${fruit}&quot;)
+
+    //add an item 
+    fruit.add(&quot;Pear&quot;)
+    println(&quot;Mutable List: ${fruit}&quot;)
+
+    //update an item
+    fruit[1] = &quot;Orange&quot;
+    println(&quot;Mutable List: ${fruit}&quot;)
+
+    //remove an item
+    fruit.removeAt(2)
+    println(&quot;Mutable List: ${fruit}&quot;)</code></pre>
+<p>When you run this code, the last lines of the output should be:</p>
+<pre><code>Mutable List: [Banana, Kiwifruit, Mango, Apple]
+Mutable List: [Banana, Kiwifruit, Mango, Apple, Pear]
+Mutable List: [Banana, Orange, Mango, Apple, Pear]
+Mutable List: [Banana, Orange, Apple, Pear]</code></pre>
+<h2>immutable list</h2>
+<p>Add the following lines of code to the end of your main function:</p>
+<pre><code>    val mutableNumbers: MutableList&lt;Int&gt; = mutableListOf(1, 2, 3)
+    val readOnlyView: List&lt;Int&gt; = mutableNumbers
+
+    println(&quot;Mutable numbers: ${mutableNumbers}&quot;)        // prints &quot;[1, 2, 3]&quot;
+    mutableNumbers.add(4)
+
+    println(&quot;Read only view: ${readOnlyView}&quot;)   // prints &quot;[1, 2, 3, 4]&quot;</code></pre>
+<p>When you run this code, the last lines of the output should be:</p>
+<pre><code>Mutable numbers: [1, 2, 3]
+Read only view: [1, 2, 3, 4]</code></pre>
+<p>The immutable list can view any updates.  But it can&#39;t do any updates.  Try add this line of code to the end of the main function:</p>
+<pre><code>    readOnlyView.add(5)         // -&gt; does not compile</code></pre>
+<p>It will not compile as the <em>add</em> method is not allowed to run over immutable lists.  Delete this line of code now.</p>
+<h2>iterating over a collection</h2>
+<p>In the above code, we just printed out the entire contents of the lists.  If we wanted to iterate over the collection of <em>fruit</em> and, say, print each item on a new line, we could do it like so (add this at the end of your main method):</p>
+<pre><code>    //ITERATING
+    for(fruitItem in fruit)
+        println(fruitItem)</code></pre>
+<p>Run this code and you should have the each item stored in <em>fruit</em> printed on individual lines like so:</p>
+<pre><code>Banana
+Orange
+Apple
+Pear</code></pre>
+<p>Save your work and keep the project open.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="08">
+            <h1>Lambdas</h1>
+<p>We will be using lambdas a fair bit when we move into the Android framework.  We will familiarise ourselves with them a little before starting Android.</p>
+<p>Some points on Lambdas:</p>
+<ul>
+<li><p>You can pass an anonymous function (a lambda) as a parameter of a function.</p>
+</li>
+<li><p>A lambda expression is always surrounded by curly braces.</p>
+</li>
+<li><p>Its parameters (if any) are declared before -&gt; (parameter types may be omitted),</p>
+</li>
+<li><p>The body goes after -&gt; (when present).</p>
+</li>
+<li><p>An implicit variable called “it” is created and refers to the lambda expression’s only argument.</p>
+</li>
+</ul>
+<h2>Using Lambdas to Iterate over Collections</h2>
+<p>In the last step, we looked at Lists and also at iterating over them using the for-each loop e.g.:</p>
+<pre><code>    //DECLARING A MUTABLE LIST
+    val fruit = mutableListOf(&quot;Banana&quot;, &quot;Kiwifruit&quot;, &quot;Mango&quot;, &quot;Apple&quot;)
+
+    //ITERATING OVER THE LIST
+    for(fruitItem in fruit)
+        println(fruitItem)</code></pre>
+<p>In this step, we will use Lamdbas to do some work on Lists for us.</p>
+<p>Leaving all code as is in the main function, add the following lines as the last statements in the function:</p>
+<pre><code>    println(&quot;\nUsing Lambdas:\n&quot;)
+    fruit.forEach  {it -&gt; println(it)}</code></pre>
+<p>The last line of code uses the <em>fruit</em> list we previously created. Over the <em>fruit</em> list, it calls the <em>forEach</em> function, passing a lambda expression as its parameter.  <em>it</em> is an implicit variable created and is the lambda expressions only parameter.  In this case <em>it</em> refers to each item in fruits.  It then prints each item in <em>fruit</em>.</p>
+<p>Run this code and you should have these lines of code as the last on your console:</p>
+<pre><code>Using Lambdas:
+
+Banana
+Orange
+Apple
+Pear</code></pre>
+<p>Let&#39;s make one more change to the last line...specifying <em>it</em> as the parameter to the lamdbda is optional, so lets remove it (run the code again to make sure all is ok):</p>
+<pre><code>    println(&quot;\nUsing Lambdas:\n&quot;)
+    fruit.forEach  {println(it)}</code></pre>
+<h2>Using Lambdas to Filter Collections</h2>
+<p>Our last line of code in the main function should read:</p>
+<pre><code>    fruit.forEach  {println(it)}</code></pre>
+<p>We are going to update this line so that we can filter out all items except those that contain <em>an</em>.  Make this change:</p>
+<pre><code>    fruit.filter {it.contains(&quot;an&quot;)}
+         .forEach {println(it)}</code></pre>
+<p>Run the code, and only <em>Banana</em> and <em>Orange</em> should be displayed to the console.</p>
+<h2>Using Lambdas to Sort Collections</h2>
+<p>Our last line of code in the main function should read:</p>
+<pre><code>    fruit.filter {it.contains(&quot;an&quot;)}
+         .forEach {println(it)}</code></pre>
+<p>We are going to update this line so that we can sort the qualifying items.  As our data is already in alphabetic order, we will sort descending.  Make this change:</p>
+<pre><code>    fruit.filter {it.contains(&quot;an&quot;)}
+         .sortedByDescending { it }
+         .forEach {println(it)}</code></pre>
+<p>Run the code, and only <em>Banana</em> and <em>Orange</em> should be displayed to the console, but this time, they are displayed in descending order with Orange first, then Banana.</p>
+<h2>Using Lambdas to display in Uppercase</h2>
+<p>Our last line of code in the main function should read:</p>
+<pre><code>    fruit.filter {it.contains(&quot;an&quot;)}
+         .sortedByDescending { it }
+         .forEach {println(it)}</code></pre>
+<p>We are going to update this line so that we can display the qualifying items in uppercase.  Make this change:</p>
+<pre><code>    fruit.filter {it.contains(&quot;an&quot;)}
+        .sortedByDescending { it }
+        .map {it.toUpperCase()}
+        .forEach {println(it)}</code></pre>
+<p>Run the code.   Now <em>ORANGE</em>, followed by <em>BANANA</em> should be displayed.</p>
+<p>Save your work and close the project. </p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Exercises">
+            <h1>Exercises</h1>
+<h2>Exercise 1:</h2>
+<p>If you have time to spare, experiment with the constructs we covered in this lab and/or experiment with this kotlin learning resource:</p>
+<p><a href="https://kotlinlang.org/docs/tutorials/koans.html">https://kotlinlang.org/docs/tutorials/koans.html</a></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Solution">
+            <h1>Solution</h1>
+<p>Should you need it, the solution for the lab is here:</p>
+<pre><code>fun main(args: Array&lt;String&gt;) {
+
+    val myArray = arrayOf(4, 5, 6, 7)
+    println(myArray.asList())
+    println(myArray[2])
+
+    val myMixedArray = arrayOf(4, 5, 6, 7, &quot;mixed&quot;, &quot;types&quot;, &quot;allowed&quot;)
+    println(myMixedArray.asList())
+    println(myMixedArray)
+
+    val intArray1    = intArrayOf(4, 5, 6, 7)
+    val intArray2    = arrayOf&lt;Int&gt;(4, 5, 6, 7)
+    val charArray    = charArrayOf(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;)
+    val booleanArray = booleanArrayOf(true, false, true)
+
+    println(&quot;IntArray1 : ${intArray1.asList()} and is type ${intArray1.javaClass.typeName}&quot;)
+    println(&quot;IntArray2 : ${intArray2.asList()} and is type ${intArray2.javaClass.typeName}&quot;)
+    println(&quot;charArray : ${charArray.asList()} and is type ${charArray.javaClass.typeName}&quot;)
+    println(&quot;booleanArray : ${booleanArray.asList()} and is type ${booleanArray.javaClass.typeName}&quot;)
+
+    val intArray = Array(6,  {i -&gt; i * 2} )
+    println (&quot;Array using Constructor: ${intArray.asList()}&quot;)
+
+
+    //MUTABLE LIST
+    val fruit = mutableListOf(&quot;Banana&quot;, &quot;Kiwifruit&quot;, &quot;Mango&quot;, &quot;Apple&quot;)
+    println(&quot;Mutable List: ${fruit}&quot;)
+    //add an item
+    fruit.add(&quot;Pear&quot;)
+    println(&quot;Mutable List: ${fruit}&quot;)
+    //update an item
+    fruit[1] = &quot;Orange&quot;
+    println(&quot;Mutable List: ${fruit}&quot;)
+    //remove an item
+    fruit.removeAt(2)
+    println(&quot;Mutable List: ${fruit}&quot;)
+
+
+    //IMMUTABLE LIST
+    val mutableNumbers: MutableList&lt;Int&gt; = mutableListOf(1, 2, 3)
+    val readOnlyView: List&lt;Int&gt; = mutableNumbers
+
+    println(&quot;Mutable numbers: ${mutableNumbers}&quot;)        // prints &quot;[1, 2, 3]&quot;
+    mutableNumbers.add(4)
+
+    println(&quot;Read only view: ${readOnlyView}&quot;)   // prints &quot;[1, 2, 3, 4]&quot;
+
+    //ITERATING
+    for(fruitItem in fruit)
+        println(fruitItem)
+
+    println(&quot;\nUsing Lambdas:\n&quot;)
+    fruit.filter {it.contains(&quot;an&quot;)}
+        .sortedByDescending { it }
+        .map {it.toUpperCase()}
+        .forEach {println(it)}
+
+
+}</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
