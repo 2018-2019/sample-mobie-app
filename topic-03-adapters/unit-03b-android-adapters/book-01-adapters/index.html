@@ -253,7 +253,7 @@ html, body {
 <p>Download, expand and open in Studio the sample solution above. Run it in the emulator.</p>
 <hr>
 <h2>Exercise 2:</h2>
-<p>Make sure you can auto import the correct libraries when you introduce referenced. As an exercise, delete all of the imports from PlacemarkActivity:</p>
+<p>Make sure you can auto import the correct libraries when you introduce referenced. As an exercise, delete all of the imports from PlacemarkActivity.</p>
 <hr>
 <h2>Exercise 3</h2>
 <p>Create an ArrayList of Placemarks in PlacemarkActivity - and add each new activity to this list.</p>
@@ -365,7 +365,7 @@ class MainApp : Application(), AnkoLogger {
       android:name=&quot;org.wit.placemark.main.MainApp&quot;
 ...</code></pre>
 <p>A single instance of this class will be created when our application will be launched. A reference to this application can be acquired in other activities as needed.</p>
-<p>Run the app now, and verify that the log message is being generated.</p>
+<p>Run the app now, and verify that the log message is being generated (you can search for the log string in LogCat).</p>
 <p>We can now put the placemarks in to this class:</p>
 <h2>MainApp</h2>
 <pre><code>class MainApp : Application(), AnkoLogger {
@@ -420,7 +420,7 @@ class MainApp : Application(), AnkoLogger {
 <li><a href="https://kotlinlang.org/docs/reference/null-safety.html">https://kotlinlang.org/docs/reference/null-safety.html</a></li>
 </ul>
 <h2>lateinit</h2>
-<p>Sometimes, we which to override null safety checks - particularly if we are certain that the reference will in fact be initialised. Replace MainApp now with this version:</p>
+<p>Sometimes, we wish to override null safety checks - particularly if we are certain that the reference will in fact be initialised. Replace MainApp now with this version:</p>
 <h2>PlacemarkActivity</h2>
 <pre><code>class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
@@ -464,7 +464,7 @@ class MainApp : Application(), AnkoLogger {
         
           <div class="ui tab segment lab" data-tab="03">
             <h1>PlacemarkList</h1>
-<p>We need a new Activity to present a list of placemarks - <code>PlacemarkListActivity</code>. Introducing a new view usually requires at lest the following:</p>
+<p>We need a new Activity to present a list of placemarks - <code>PlacemarkListActivity</code>. Introducing a new view usually requires at least the following:</p>
 <ul>
 <li>a layout</li>
 <li>a class</li>
@@ -587,18 +587,18 @@ class PlacemarkListActivity : AppCompatActivity() {
 <li>RecyclerView</li>
 <li>RecyclerViewAdapter</li>
 </ul>
-<p>Orchestrating these three is now a familiar patterns in Android development. It is covered briefly in this article here:</p>
+<p>Orchestrating these three is now a familiar pattern in Android development. It is covered briefly in this article here:</p>
 <ul>
 <li><a href="https://developer.android.com/training/material/lists-cards.html">https://developer.android.com/training/material/lists-cards.html</a></li>
 </ul>
 <p>This is worth a quick read before proceeding.</p>
 <h2>CardView</h2>
-<p>CardView itself is supported by a library - which must be included now:</p>
+<p>CardView itself is supported by a library - which must be included now (and sync when prompted):</p>
 <h2>build.gradle</h2>
 <pre><code>...
   implementation &#39;com.android.support:cardview-v7:28.0.0&#39;
 ...</code></pre>
-<p>Here is the cardview itself:</p>
+<p>Here is the cardview itself, which should be placed in the res/layout folder:</p>
 <h2>card_placemark.xml</h2>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;android.support.v7.widget.CardView
@@ -628,7 +628,7 @@ class PlacemarkListActivity : AppCompatActivity() {
 
   &lt;/RelativeLayout&gt;
 &lt;/android.support.v7.widget.CardView&gt;</code></pre>
-<p>When you rebuild the project, you should be able to view the card in design view.</p>
+<p>You should be able to view the card in design view (rebuild the project if you can&#39;t see it).</p>
 <p>We can insert the cards into the activity_placemark_list layout - by introducing a RecyclerView widget like this:</p>
 <h2>activity_placemark_list.xml</h2>
 <pre><code>...
@@ -711,9 +711,9 @@ class PlacemarkAdapter constructor(private var placemarks: List&lt;PlacemarkMode
         
           <div class="ui tab segment lab" data-tab="05">
             <h1>Menu &amp; Actionbar</h1>
-<p>In order to trigger the creation of Placemarks, we need some menu/action mechanic on our home screen. This will be provided by supporing a button/menu an action bar along the top of the PlacemarkListActivity.</p>
+<p>In order to trigger the creation of Placemarks, we need some menu/action mechanics on our home screen. We will now provide a button/menu in the action bar along the top of the PlacemarkListActivity.</p>
 <p>First a new string resource:</p>
-<h2>stings.xml</h2>
+<h2>strings.xml</h2>
 <pre><code>  &lt;string name=&quot;menu_addPlacemark&quot;&gt;Add&lt;/string&gt;</code></pre>
 <p>Then a new menu resource:</p>
 <h2>menu_main.xml</h2>
@@ -727,7 +727,7 @@ class PlacemarkAdapter constructor(private var placemarks: List&lt;PlacemarkMode
       android:title=&quot;@string/menu_addPlacemark&quot;
       app:showAsAction=&quot;always&quot;/&gt;
 &lt;/menu&gt;</code></pre>
-<p>The above resource must be in its own folder:</p>
+<p>The above resource must be in its own, new directory <em>menu</em>:</p>
 <p><img src="img/03.png" alt=""></p>
 <p>In the PlacemarkListActivity onCreate method, we must enable the action bar (and give it a title):</p>
 <h2>PlacemarkListActivity</h2>
@@ -735,15 +735,17 @@ class PlacemarkAdapter constructor(private var placemarks: List&lt;PlacemarkMode
     toolbarMain.title = title
     setSupportActionBar(toolbarMain)
 ...</code></pre>
-<p>... and then override the method to load the menu resource:</p>
+<p>... and then add a new method to load the menu resource:</p>
 <pre><code>...
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_main, menu)
     return super.onCreateOptionsMenu(menu)
   }
 ...</code></pre>
-<p>This gives us a single button on the action bar:</p>
+<p>When run, this gives us a single button on the action bar:</p>
 <p><img src="img/04.png" alt=""></p>
+<p>But clicking on it does nothing.  We will fix that in a moment.  </p>
+<h2>A note on the Add Button Icon</h2>
 <p>This is the stock icon we are using is </p>
 <pre><code>      android:icon=&quot;@android:drawable/ic_menu_add&quot;</code></pre>
 <p>This is drawn from this set:</p>
@@ -771,7 +773,9 @@ class PlacemarkAdapter constructor(private var placemarks: List&lt;PlacemarkMode
     }
     return super.onOptionsItemSelected(item)
   }</code></pre>
-<p>This implements the menu event handler - and if the event it <code>item_add</code>, we start the PlacemarkActivity.</p>
+<p>For this code to work, you will need this import:</p>
+<pre><code>import org.jetbrains.anko.startActivityForResult</code></pre>
+<p>This code implements the menu event handler - and if the event is <code>item_add</code>, we start the PlacemarkActivity.</p>
 <p>We are using the anko intent library:</p>
 <ul>
 <li><a href="https://github.com/Kotlin/anko/wiki/Anko-Commons-%E2%80%93-Intents">https://github.com/Kotlin/anko/wiki/Anko-Commons-%E2%80%93-Intents</a></li>
@@ -797,7 +801,7 @@ class PlacemarkAdapter constructor(private var placemarks: List&lt;PlacemarkMode
       }
 ...</code></pre>
 <p>This should end the PlacemarkActivity - and update the List view.</p>
-<p>We can remove the test placemarks from MainApp now:</p>
+<p>We can now remove the test placemark data from MainApp:</p>
 <pre><code>  override fun onCreate() {
     super.onCreate()
     info(&quot;Placemark started&quot;)
@@ -805,6 +809,7 @@ class PlacemarkAdapter constructor(private var placemarks: List&lt;PlacemarkMode
     // placemarks.add(PlacemarkModel(&quot;Two&quot;, &quot;About two...&quot;))
     // placemarks.add(PlacemarkModel(&quot;Three&quot;, &quot;About three...&quot;))
   }</code></pre>
+<p>Run the app again and test that the placemarks added by you are now listed.</p>
 
           </div>
         
@@ -819,7 +824,21 @@ class PlacemarkAdapter constructor(private var placemarks: List&lt;PlacemarkMode
 <h2>Exercise 2: Cancel Button</h2>
 <p>Incorporate new &#39;Cancel&#39; action into <code>PlacemarkActivity</code>. This should return to PlacemarkListActivity without adding a new Placemark.</p>
 <p><img src="img/18.png" alt=""></p>
-<p>Follow the steps 05 &amp; 06 in this lab as a guide to doing this. Remember, you will be introducing the menu/action into PlacemarkActivity.</p>
+<p>Follow the steps 05 &amp; 06 in this lab as a guide to doing this. Remember, you will be introducing the menu/action into PlacemarkActivity.  As an additional hint, you will need to do the following steps:</p>
+<ul>
+<li><p>Create a new string.xml entry for the cancel button</p>
+</li>
+<li><p>Create a new menu_placemark.xml with a cancel button itemised in it</p>
+</li>
+<li><p>In PlacemarkActivity.kt, you will need to add support for the action bar:</p>
+</li>
+</ul>
+<pre><code>        //Add action bar and set title
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)</code></pre>
+<ul>
+<li>In PlacemarkActivity.kt you then need to inflate the menu and also handle the event. </li>
+</ul>
 <h2>Exercise 3: Refactor PlacemarkAdapter to its own source file.</h2>
 <p>The PlacemarkAdapter class is currently in the same source file as the PlacemarkListActivity class. For clarity and ease of maintenance, move this into its own source file.</p>
 

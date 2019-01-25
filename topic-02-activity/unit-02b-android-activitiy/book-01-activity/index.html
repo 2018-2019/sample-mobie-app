@@ -258,14 +258,20 @@ html, body {
 <p>Also, change our theme:</p>
 <h2>styles.xml</h2>
 <pre><code>  &lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</code></pre>
-<p>This replaces the &#39;DarkActionBar&#39; theme in the generated style</p>
+<p>This replaces the &#39;DarkActionBar&#39; theme in the generated style.  This image will give you an idea of some popular AppThemes:</p>
+<p><img src="img/19.png" alt=""></p>
 <p>Now change the colours:</p>
 <h2>colours.xml</h2>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;resources&gt;
-  &lt;color name=&quot;colorPrimary&quot;&gt;#FFFFFF&lt;/color&gt;
-  &lt;color name=&quot;colorPrimaryDark&quot;&gt;#000000&lt;/color&gt;
-  &lt;color name=&quot;colorAccent&quot;&gt;#4c90af&lt;/color&gt;
+    &lt;!-- colour for the app bar and other primary UI elements --&gt;
+    &lt;color name=&quot;colorPrimary&quot;&gt;#FFFFFF&lt;/color&gt;
+    &lt;!-- a darker variant of the primary colour, used for this
+         like status bars and other app bars.  --&gt;
+    &lt;color name=&quot;colorPrimaryDark&quot;&gt;#000000&lt;/color&gt;
+    &lt;!-- a secondary colour for controls like checkboxes
+         and text fields.  --&gt;
+    &lt;color name=&quot;colorAccent&quot;&gt;#4c90af&lt;/color&gt;
 &lt;/resources&gt;</code></pre>
 <p>Or choose other colours as you please...</p>
 <p>We also need a new string for the button, which we will introduce in the next step:</p>
@@ -332,7 +338,7 @@ html, body {
 
   &lt;/RelativeLayout&gt;
 &lt;/android.support.constraint.ConstraintLayout&gt;</code></pre>
-<p>Keep an eye on the Design view as you make this change.</p>
+<p>Keep an eye on the Design view as you make the next change...you will see the <em>Component Tree</em> growing. </p>
 <h2>activity_placemark.xml Version C</h2>
 <p>... augment with a scroll view containing a linear layout:</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -380,6 +386,7 @@ html, body {
 
   &lt;/RelativeLayout&gt;
 &lt;/android.support.constraint.ConstraintLayout&gt;</code></pre>
+<p>Keep an eye on the Design view as you make the next change...you will see the app design visibly changing.</p>
 <h2>activity_placemark.xml Version D</h2>
 <p>... scroll view linear layout contains a text edit field:</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -447,7 +454,7 @@ html, body {
   &lt;string name=&quot;hint_placemarkTitle&quot;&gt;Placemark Title&lt;/string&gt;
 &lt;/resources&gt;</code></pre>
 <h2>activity_placemark.xml Version E</h2>
-<p>... a new button in the layout</p>
+<p>... now add a new button in the layout</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;android.support.constraint.ConstraintLayout
 xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -523,7 +530,7 @@ tools:context=&quot;org.wit.placemark.PlacemarkActivity&quot;&gt;
 <p><img src="img/09.png" alt=""></p>
 <p>This short article on layouts is a useful primer:</p>
 <ul>
-<li>&lt;<a href="https://medium.com/google-developers/layouts-attributes-and-you-9e5a4b4fe32c">https://medium.com/google-developers/layouts-attributes-and-you-9e5a4b4fe32c</a>.</li>
+<li><a href="https://medium.com/google-developers/layouts-attributes-and-you-9e5a4b4fe32c">https://medium.com/google-developers/layouts-attributes-and-you-9e5a4b4fe32c</a></li>
 </ul>
 
           </div>
@@ -574,7 +581,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     }</code></pre>
 <p>Run the app and notice the difference:</p>
 <ul>
-<li><p>when you press the button without entering a title, a toast message appears</p>
+<li><p>when you press the button without entering a title, an Android <em>toast</em> message appears</p>
 </li>
 <li><p>when you press the button after entering a title, a log message is recorded on the LogCat view.</p>
 </li>
@@ -583,12 +590,19 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 <ul>
 <li><a href="https://github.com/Kotlin/anko/wiki/Anko-Commons-%E2%80%93-Dialogs">https://github.com/Kotlin/anko/wiki/Anko-Commons-%E2%80%93-Dialogs</a></li>
 </ul>
+<h2>Note on kotlinx import</h2>
+<p>Sometimes Android Studio can&#39;t resolve the &#39;import kotlinx&#39; reference.  If this happens to you, take these steps to resolve the issue:</p>
+<ul>
+<li>Build -&gt; Clean Project</li>
+<li>Build - &gt; Rebuild Project</li>
+</ul>
+<p>The error should then disappear.</p>
 
           </div>
         
           <div class="ui tab segment lab" data-tab="04">
             <h1>Refactor</h1>
-<p>Refactor the application structure such that ActivityPlacemark is in a <strong>new</strong> package called &#39;org.wit.placemarks.activities&#39;:</p>
+<p>We are going to change the application structure such that ActivityPlacemark is in a <strong>new</strong> package called &#39;org.wit.placemark.activities&#39;:</p>
 <p><img src="img/10.png" alt=""></p>
 <p>You should be able to do this from within the Studio Android perspective. You will be using the context menu to <strong><em>create the new package</em></strong> in the java folder:</p>
 <p><img src="img/16.png" alt=""></p>
@@ -660,7 +674,14 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         toast (&quot;Please Enter a title&quot;)
       }
     }</code></pre>
-<p>Run the app and test clicking the button when you have 1) text entered and 2) no text entered in the placemark title textbox.  </p>
+<p>Run the app and test clicking the button when you have:</p>
+<ul>
+<li>text entered and </li>
+<li>no text entered </li>
+</ul>
+<p>in the placemark title textbox.  </p>
+<p>Check the LogCat entries. You should have something simiar to this entry, with your title appended in place of <em>Waterford</em>:</p>
+<pre><code>01-25 13:11:02.489 10017-10017/org.wit.placemark I/PlacemarkActivity: add Button Pressed: PlacemarkModel(title=Waterford)</code></pre>
 
           </div>
         
@@ -698,9 +719,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     }
   }
 }</code></pre>
-<p>Now reintroduce them one-by-one (using IntelliJ supports). Keep a close eye on any choices you make as you do this.</p>
+<p>Now reintroduce them one-by-one (using IntelliJ supports e.g. Alt+Enter or the LightBulb). Keep a close eye on any choices you make as you do this.</p>
 <h2>Exercise 3:</h2>
-<p>Create an ArrayList of Placemarks in PlacemarkActivity - and add each new placemark to this list.</p>
+<p>Create an ArrayList of Placemarks in PlacemarkActivity.  Instead of storing the placemark title in a single object, we will now add each new placemark to this list.</p>
 <p>Log all placemarks when a new one is entered.</p>
 <p>HINT: Here is a simple placemark array declaration + creation:</p>
 <pre><code>  val placemarks = ArrayList&lt;PlacemarkModel&gt;()</code></pre>
@@ -714,9 +735,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 <ul>
 <li>and a new field in the layout</li>
 <li>add a new entry in the strings.xml file</li>
-<li>expend the model</li>
+<li>expand the model class to store this new field</li>
 <li>recover the field in the event handler and include in the model objects</li>
-<li>log the new field</li>
+<li>log the new field when the add button is pressed</li>
 </ul>
 
           </div>

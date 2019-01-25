@@ -268,41 +268,51 @@ html, body {
 <img src="img/03.png" alt="">
 <img src="img/04.png" alt=""></p>
 <p>When you click the <em>Finish</em> button, it can take a bit of time for Gradle to download the required project info.</p>
-<p>When Gradle has finished, your project should look something like this:</p>
+<p>When Gradle has finished, your project (when you expand the folders) should look something like this:</p>
 <p><img src="img/06.png" alt=""></p>
 
           </div>
         
           <div class="ui tab segment lab" data-tab="03">
             <h1>Running the Hello World app</h1>
-<p>In this step, we will learn how to run an app on the virtual device (AVD).  But we will have to set up the emulator first.</p>
+<p>In this step, we will learn how to run an app on the Android Virtual Device (AVD) i.e an emulator.  But we will have to set up this emulator first.</p>
 <h2>Setting up the emulator (AVD)</h2>
 <p>Now try to build and run the project (select <em>Run -&gt; Run app</em> from the menu).</p>
-<p>When you first attempt to run the app, you will be asked to create a Virtual Device.  Click the <em>Create New Virtual Device</em> to do start this process.</p>
+<p>When you first attempt to run the app, you will be asked to create a Virtual Device.  Click the <em>Create New Virtual Device</em> button to do start this process.</p>
 <ul>
 <li><p>Select a Phone...we used <em>Nexus 5X</em>.  Click the <em>Next</em> button.</p>
 </li>
-<li><p>Download an API level...we chose <em>Noguat(API Level 25)</em>.  </p>
+<li><p>Download an API level...we chose <em>Nougat(API Level 25)</em>.  </p>
 </li>
 <li><p>When it is finished downloading, click the <em>Finish</em> button.  </p>
 </li>
-<li><p>Then click on the downloaded release (the <em>Next</em> button should now be active). Click the <em>Next</em> button.</p>
+<li><p>Then click on the downloaded release (the <em>Next</em> button should now become active). Click the <em>Next</em> button.</p>
 </li>
 </ul>
-<p>Your virtual device configuration should now look something similar to this one.  Click the <em>Finish</em> button (and, if asked, accept any suggestions for installing additional items).</p>
+<p>Your virtual device configuration should now look similar to this one.  Click the <em>Finish</em> button (and, if asked, accept any suggestions for installing additional items).</p>
 <p><img src="img/02x.png" alt=""></p>
 <h2>Installing HAXM</h2>
-<p>If it isn&#39;t already installed, we will need to install HAXM (Intel&#39;s Hardware Accelerated Execution Manager).  It is a hardware-assisted virtualization engine that speeds up Android app emulation on a host machine. </p>
-<p>To do this, select <em>Tools-&gt; SDK manager</em> from the menu.  Then check the box beside <em>Intel x86 Emulator Accelerator (HAXM Installer)</em>.  Click the <em>Apply</em> button.</p>
+<p>HAXM (Intel&#39;s Hardware Accelerated Execution Manager) probably isn&#39;t  installed on your machine.  It is a hardware-assisted virtualization engine that speeds up Android app emulation on a host machine. </p>
+<p>To install it:</p>
+<ul>
+<li><p>select <em>Tools-&gt; SDK Manager</em> from the menu.</p>
+</li>
+<li><p>check the box beside <em>Intel x86 Emulator Accelerator (HAXM Installer)</em>.</p>
+</li>
+<li><p>click the <em>Apply</em> button.</p>
+</li>
+</ul>
+<p>Note: if you don&#39;t install HAXM, your virtaul machine probably won&#39;t run (or will complain).</p>
 <h2>Running the app</h2>
 <p>Gradle may continue and launch the emulator to run your app.  If it doesn&#39;t select <em>Run -&gt; Run app</em> from the menu again.</p>
-<p>When your app launches successfully, it should look like this in the VM:</p>
+<p>When your app launches successfully, it should look like this in the emulator:</p>
 <p><img src="img/04x.png" alt=""></p>
 <h2>Viewing your AVDs</h2>
-<p>The VM that we just installed can be viewed by selecting Tools -&gt; AVD Manager</p>
+<p>The emulator that we just installed can be viewed by selecting Tools -&gt; AVD Manager</p>
 <p><img src="img/03x.png" alt=""></p>
 <p>The version, size and resolution are a reasonable compromise. </p>
 <h2>.gitignore</h2>
+<p><em>Ignore this if you are NOT planning on using git</em></p>
 <p>If you are using git, you might want to make the following small adjustments to the generated .gitignore file:</p>
 <pre><code>*.iml
 .gradle
@@ -463,6 +473,8 @@ dependencies {
   androidTestImplementation &#39;com.android.support.test:runner:1.0.2&#39;
   androidTestImplementation &#39;com.android.support.test.espresso:espresso-core:3.0.2&#39;
 }</code></pre>
+<p>Android Studio may prompt you to <em>Sync Now</em>.  Do this.  </p>
+<h2>Anko</h2>
 <p>This library is documented here:</p>
 <ul>
 <li><a href="https://github.com/Kotlin/anko">https://github.com/Kotlin/anko</a></li>
@@ -480,7 +492,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 <pre><code>...
     info(&quot;Placemark Activity started..&quot;)
 ...</code></pre>
-<p>Again, this will require an import - which will be this:</p>
+<p>Again, this will require an import - which will be this (try use Alt+Enter to insert it):</p>
 <pre><code>import org.jetbrains.anko.info</code></pre>
 <p>Now, make sure you can run the app and find the log entry in the &#39;Logcat&#39; view in Android Studio:</p>
 <p><img src="img/13.png" alt=""></p>
@@ -504,7 +516,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 <li>terminate (stop) the currently executing version of the app on the emulator.</li>
 <li>completely remove the application from the emulator, and install it again. </li>
 </ul>
-<p>This thread might offer some guidance: <a href="https://stackoverflow.com/questions/2994407/how-do-i-delete-sample-app-from-an-android-emulator">https://stackoverflow.com/questions/2994407/how-do-i-delete-sample-app-from-an-android-emulator</a></p>
+<p>This thread will offer a few ways of do this: <a href="https://stackoverflow.com/questions/2994407/how-do-i-delete-sample-app-from-an-android-emulator">https://stackoverflow.com/questions/2994407/how-do-i-delete-sample-app-from-an-android-emulator</a></p>
 <h2>Exercise 2:</h2>
 <p>If you have an android phone, plug it in and see if you can execute the application on the device. It should just be a matter of plugging it into your workstation - and it should appear as another device alongside the emulator device we just installed.</p>
 <h2>Exercise 3:</h2>
