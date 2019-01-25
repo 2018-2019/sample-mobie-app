@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../../index.html"> Android Activities  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab-01a Intro">
+          Lab-01a Intro
+        </a>
+      
+        <a class="item" data-tab="01">
+          01
+        </a>
+      
+        <a class="item" data-tab="02">
+          02
+        </a>
+      
+        <a class="item" data-tab="03">
+          03
+        </a>
+      
+        <a class="item" data-tab="04">
+          04
+        </a>
+      
+        <a class="item" data-tab="05">
+          05
+        </a>
+      
+        <a class="item" data-tab="Exercises">
+          Exercises
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-01-intro-to-kotlin/index.html">Kotlin Lab-01 Intro </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-02-control-flow/index.html">Kotlin Lab-02 Control Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-01-kotlin-intro/unit-01b-kotlin-labs/book-03-classes-and-collections/index.html">Kotlin Lab-03 Classes + Collections </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-02-activity/unit-02b-android-activitiy/book-00-getting-started/index.html">Lab-01a Intro </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-02-activity/unit-02b-android-activitiy/book-01-activity/index.html">Lab-01b Activities </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-03-adapters/unit-03b-android-adapters/book-01-adapters/index.html">Lab-02 Adapters </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-04-models/unit-04b-android-models/book-01-models/index.html">Lab-03 Models </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-05-images/unit-05b-images/book-01-images/index.html">Lab-04 Images </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-06-map-activity/unit-06b-map-activity/book-01-maps/index.html">Lab-05 MapActivity </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-07-persistence/unit-07b-json/book-01-json/index.html">Lab-06 JSON </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-08-layouts/unit-08b-map-view/book-01-map-view/index.html">Lab-07 MapView </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-09-location/unit-09b-location/book-1-location/index.html">Lab-08a Location </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://2018-2019.github.io/mobile-app//topic-09-location/unit-09c/book-2-location/index.html">Lab-08b Tracking </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab-01a Intro">
+            <h1>Objectives</h1>
+<p>Download and configure Android Studio (if you have your own computer). Generate and run a sample application.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="01">
+            <h1>Setup</h1>
+<p>This step is only for those wishing to install Android Studio on your own computer.  If you are using the college computers, please move onto the next step, 02.</p>
+<h2>Download</h2>
+<p>Download and install the latest Android Studio (3.2 when this lab was updated last).</p>
+<h2>Indentation Levels</h2>
+<p>Run Android Studio - and change the code settings to use tab size = 2, indent = 2 and continuation indent = 4 for Kotlin:</p>
+<p><img src="img/01x.png" alt=""></p>
+<p>Do the same for XML, Groovy, Java and JSON. </p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="02">
+            <h2>New Project</h2>
+<p>With Android Studio open, create an new Android project with the following key characteristics:</p>
+<ul>
+<li>Kotlin</li>
+<li>Single &#39;Empty&#39; activity</li>
+</ul>
+<p>Follow the structure and parameters outlined here:</p>
+<p><img src="img/01.png" alt="">
+<img src="img/02.png" alt="">
+<img src="img/03.png" alt="">
+<img src="img/04.png" alt=""></p>
+<p>When you click the <em>Finish</em> button, it can take a bit of time for Gradle to download the required project info.</p>
+<p>When Gradle has finished, your project should look something like this:</p>
+<p><img src="img/06.png" alt=""></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="03">
+            <h1>Running the Hello World app</h1>
+<p>In this step, we will learn how to run an app on the virtual device (AVD).  But we will have to set up the emulator first.</p>
+<h2>Setting up the emulator (AVD)</h2>
+<p>Now try to build and run the project (select <em>Run -&gt; Run app</em> from the menu).</p>
+<p>When you first attempt to run the app, you will be asked to create a Virtual Device.  Click the <em>Create New Virtual Device</em> to do start this process.</p>
+<ul>
+<li><p>Select a Phone...we used <em>Nexus 5X</em>.  Click the <em>Next</em> button.</p>
+</li>
+<li><p>Download an API level...we chose <em>Noguat(API Level 25)</em>.  </p>
+</li>
+<li><p>When it is finished downloading, click the <em>Finish</em> button.  </p>
+</li>
+<li><p>Then click on the downloaded release (the <em>Next</em> button should now be active). Click the <em>Next</em> button.</p>
+</li>
+</ul>
+<p>Your virtual device configuration should now look something similar to this one.  Click the <em>Finish</em> button (and, if asked, accept any suggestions for installing additional items).</p>
+<p><img src="img/02x.png" alt=""></p>
+<h2>Installing HAXM</h2>
+<p>If it isn&#39;t already installed, we will need to install HAXM (Intel&#39;s Hardware Accelerated Execution Manager).  It is a hardware-assisted virtualization engine that speeds up Android app emulation on a host machine. </p>
+<p>To do this, select <em>Tools-&gt; SDK manager</em> from the menu.  Then check the box beside <em>Intel x86 Emulator Accelerator (HAXM Installer)</em>.  Click the <em>Apply</em> button.</p>
+<h2>Running the app</h2>
+<p>Gradle may continue and launch the emulator to run your app.  If it doesn&#39;t select <em>Run -&gt; Run app</em> from the menu again.</p>
+<p>When your app launches successfully, it should look like this in the VM:</p>
+<p><img src="img/04x.png" alt=""></p>
+<h2>Viewing your AVDs</h2>
+<p>The VM that we just installed can be viewed by selecting Tools -&gt; AVD Manager</p>
+<p><img src="img/03x.png" alt=""></p>
+<p>The version, size and resolution are a reasonable compromise. </p>
+<h2>.gitignore</h2>
+<p>If you are using git, you might want to make the following small adjustments to the generated .gitignore file:</p>
+<pre><code>*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild</code></pre>
+<p>(we are excluding all .idea files)</p>
+<p>If you are using git, it is a good idea to commit the project to a repository now.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="04">
+            <h1>Key Project Files &amp; Resources</h1>
+<p>Although the project structure looks daunting, there are only a small number of source files to work with regularly:</p>
+<p>Find each of these files now (these are presented here without filenames)</p>
+<pre><code>package org.wit.placemark
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+
+class PlacemarkActivity : AppCompatActivity() {
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_placemark)
+  }
+}</code></pre>
+<hr>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+          package=&quot;org.wit.placemark&quot;&gt;
+
+  &lt;application
+      android:allowBackup=&quot;true&quot;
+      android:icon=&quot;@mipmap/ic_launcher&quot;
+      android:label=&quot;@string/app_name&quot;
+      android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;
+      android:supportsRtl=&quot;true&quot;
+      android:theme=&quot;@style/AppTheme&quot;&gt;
+    &lt;activity android:name=&quot;.PlacemarkActivity&quot;&gt;
+      &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+
+        &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+      &lt;/intent-filter&gt;
+    &lt;/activity&gt;
+  &lt;/application&gt;
+
+&lt;/manifest&gt;</code></pre>
+<hr>
+<pre><code>apply plugin: &#39;com.android.application&#39;
+
+apply plugin: &#39;kotlin-android&#39;
+
+apply plugin: &#39;kotlin-android-extensions&#39;
+
+android {
+  compileSdkVersion 28
+  defaultConfig {
+    applicationId &quot;org.wit.placemark&quot;
+    minSdkVersion 23
+    targetSdkVersion 28
+    versionCode 1
+    versionName &quot;1.0&quot;
+    testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile(&#39;proguard-android.txt&#39;), &#39;proguard-rules.pro&#39;
+    }
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: &#39;libs&#39;, include: [&#39;*.jar&#39;])
+  implementation &quot;org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version&quot;
+  implementation &#39;com.android.support:appcompat-v7:28.0.0&#39;
+  implementation &#39;com.android.support.constraint:constraint-layout:1.1.3&#39;
+  testImplementation &#39;junit:junit:4.12&#39;
+  androidTestImplementation &#39;com.android.support.test:runner:1.0.2&#39;
+  androidTestImplementation &#39;com.android.support.test.espresso:espresso-core:3.0.2&#39;
+}</code></pre>
+<hr>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;android.support.constraint.ConstraintLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    tools:context=&quot;org.wit.placemark.PlacemarkActivity&quot;&gt;
+
+  &lt;TextView
+      android:layout_width=&quot;wrap_content&quot;
+      android:layout_height=&quot;wrap_content&quot;
+      android:text=&quot;Hello World!&quot;
+      app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+      app:layout_constraintLeft_toLeftOf=&quot;parent&quot;
+      app:layout_constraintRight_toRightOf=&quot;parent&quot;
+      app:layout_constraintTop_toTopOf=&quot;parent&quot;/&gt;
+
+&lt;/android.support.constraint.ConstraintLayout&gt;</code></pre>
+<hr>
+<pre><code>&lt;resources&gt;
+  &lt;string name=&quot;app_name&quot;&gt;Placemark&lt;/string&gt;
+&lt;/resources&gt;</code></pre>
+<hr>
+<pre><code>&lt;resources&gt;
+
+  &lt;!-- Base application theme. --&gt;
+  &lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.DarkActionBar&quot;&gt;
+    &lt;!-- Customize your theme here. --&gt;
+    &lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;
+    &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;
+    &lt;item name=&quot;colorAccent&quot;&gt;@color/colorAccent&lt;/item&gt;
+  &lt;/style&gt;
+
+&lt;/resources&gt;</code></pre>
+<hr>
+<p>The files are (in order of appearence)</p>
+<ul>
+<li>app/src/main/java/org/wit/placemark/PlacemarkActivity.kt</li>
+<li>app/src/main/AndroidManifest.xml</li>
+<li>app/build.gradle</li>
+<li>app/src/main/res/layout/activity_placemark.xml</li>
+<li>app/src/main/res/values/strings.xml</li>
+<li>app/src/main/res/values/styles.xml</li>
+</ul>
+<p>Locate all of these files in the Android Studio &#39;Android&#39; perspective:</p>
+<p><img src="img/06.png" alt=""></p>
+<p>and in the &#39;Project&#39; perspective:</p>
+<p><img src="img/07.png" alt=""></p>
+<p>and using Finder/Explorer:</p>
+<p><img src="img/08.png" alt=""></p>
+<p>As you gain experience in android - the role and purpose of each of these files will become clearer. </p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="05">
+            <h1>Logging Event Handling in Kotlin</h1>
+<p>We are going to be working exclusively in Kotlin - not Java. This affords considerable improvements, largely around conciseness and expressiveness of code.</p>
+<h2>Logging</h2>
+<p>To prepare for this, include this additional dependency in our build.gradle:</p>
+<h2>build.gradle (Module:app)</h2>
+<pre><code>  implementation &#39;org.jetbrains.anko:anko-commons:0.10.7&#39;</code></pre>
+<p>Your dependencies section will look like this now:</p>
+<pre><code>dependencies {
+  implementation fileTree(dir: &#39;libs&#39;, include: [&#39;*.jar&#39;])
+  implementation &quot;org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version&quot;
+  implementation &#39;com.android.support:appcompat-v7:28.0.0&#39;
+  implementation &#39;com.android.support.constraint:constraint-layout:1.1.3&#39;
+  implementation &#39;org.jetbrains.anko:anko-commons:0.10.7&#39;
+  testImplementation &#39;junit:junit:4.12&#39;
+  androidTestImplementation &#39;com.android.support.test:runner:1.0.2&#39;
+  androidTestImplementation &#39;com.android.support.test.espresso:espresso-core:3.0.2&#39;
+}</code></pre>
+<p>This library is documented here:</p>
+<ul>
+<li><a href="https://github.com/Kotlin/anko">https://github.com/Kotlin/anko</a></li>
+</ul>
+<p>We will be progressively introducing some of its features as we evolve the application.</p>
+<p>The first feature is a simple way of logging:</p>
+<p>Change the class to include the &#39;AnkoLogger&#39; feature:</p>
+<h2>PlacemarkActivity</h2>
+<pre><code>..
+class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
+...</code></pre>
+<p>When you make this change, AnkoLogger will not be recognised - so you will need to import it. This can be triggered automatically (if you can figure this out...remember our Alt+Enter). The correct import statement is:</p>
+<pre><code>import org.jetbrains.anko.AnkoLogger</code></pre>
+<p>Then, in our onCreate() method, try it out:</p>
+<pre><code>...
+    info(&quot;Placemark Activity started..&quot;)
+...</code></pre>
+<p>Again, this will require an import - which will be this:</p>
+<pre><code>import org.jetbrains.anko.info</code></pre>
+<p>Now, make sure you can run the app and find the log entry in the &#39;Logcat&#39; view in Android Studio:</p>
+<p><img src="img/13.png" alt=""></p>
+<p>Do not proceed further until you can locate something like the above in Logcat. The logs are a bit noisy, and may contain what look like errors. However, buried in there should be your message.</p>
+<p>This style of logging is discussed here:</p>
+<ul>
+<li><a href="https://github.com/Kotlin/anko/wiki/Anko-Commons-%E2%80%93-Logging">https://github.com/Kotlin/anko/wiki/Anko-Commons-%E2%80%93-Logging</a></li>
+</ul>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Exercises">
+            <h1>Solution</h1>
+<p>Placemark application so far:</p>
+<ul>
+<li><a href="archives/placemark-00.zip">placemark-00.zip</a></li>
+</ul>
+<h2>Exercise 1:</h2>
+<p>Learn how to :</p>
+<ul>
+<li>terminate (stop) the currently executing version of the app on the emulator.</li>
+<li>completely remove the application from the emulator, and install it again. </li>
+</ul>
+<p>This thread might offer some guidance: <a href="https://stackoverflow.com/questions/2994407/how-do-i-delete-sample-app-from-an-android-emulator">https://stackoverflow.com/questions/2994407/how-do-i-delete-sample-app-from-an-android-emulator</a></p>
+<h2>Exercise 2:</h2>
+<p>If you have an android phone, plug it in and see if you can execute the application on the device. It should just be a matter of plugging it into your workstation - and it should appear as another device alongside the emulator device we just installed.</p>
+<h2>Exercise 3:</h2>
+<p>Download, extract and run the archive/sample solution above.</p>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
