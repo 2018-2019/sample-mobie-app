@@ -451,6 +451,7 @@ html, body {
 <h2>strings.xml</h2>
 <pre><code>&lt;resources&gt;
   &lt;string name=&quot;app_name&quot;&gt;Placemark&lt;/string&gt;
+  &lt;string name=&quot;button_addPlacemark&quot;&gt;Add Placemark&lt;/string&gt;
   &lt;string name=&quot;hint_placemarkTitle&quot;&gt;Placemark Title&lt;/string&gt;
 &lt;/resources&gt;</code></pre>
 <h2>activity_placemark.xml Version E</h2>
@@ -632,7 +633,7 @@ data class PlacemarkModel(var title: String = &quot;&quot;)</code></pre>
 <li><a href="https://kotlinlang.org/docs/reference/data-classes.html">https://kotlinlang.org/docs/reference/data-classes.html</a></li>
 </ul>
 <p>Here is a new version of PlacemarkActivity that makes use of this model:</p>
-<pre><code>package wit.org.placemark.activities
+<pre><code>package org.wit.placemark.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
